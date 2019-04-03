@@ -20,10 +20,10 @@ public class MapGenerator : MonoBehaviour {
     [Range(1, 50)]
     public int num_marbles;
 
-    [Range(75, 201)]
+    [Range(75, 255)]
     public int width;
 
-    [Range(75, 201)]
+    [Range(75, 255)]
     public int height;
 
     [Range(5, 10)]

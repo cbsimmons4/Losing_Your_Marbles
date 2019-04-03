@@ -251,14 +251,14 @@ MonoBehaviour:
   groundRock: {fileID: 100000, guid: e2abe2db222fa9c49a111c088001ebcf, type: 3}
   Marble: {fileID: 4753294543171744885, guid: 521cdb075585646fd8017314e9270f7e, type: 3}
   num_marbles: 5
-  width: 173
-  height: 164
-  passageWidth: 7
-  seed: 1000
+  width: 200
+  height: 201
+  passageWidth: 5
+  seed: 1
   useRandomSeed: 0
-  randomFillPercent: 48
-  wallThresholdSize: 50
-  roomThresholdSize: 64
+  randomFillPercent: 55
+  wallThresholdSize: 20
+  roomThresholdSize: 97
 --- !u!4 &509230443
 Transform:
   m_ObjectHideFlags: 0
@@ -391,7 +391,7 @@ Transform:
   m_GameObject: {fileID: 631091595}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -7, z: 0}
-  m_LocalScale: {x: 35, y: 1, z: 35}
+  m_LocalScale: {x: 26, y: 1, z: 26}
   m_Children: []
   m_Father: {fileID: 509230443}
   m_RootOrder: 0
@@ -726,7 +726,7 @@ Transform:
   m_GameObject: {fileID: 1485404419}
   m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 35, y: 1, z: 35}
+  m_LocalScale: {x: 21, y: 1, z: 21}
   m_Children: []
   m_Father: {fileID: 509230443}
   m_RootOrder: 3
