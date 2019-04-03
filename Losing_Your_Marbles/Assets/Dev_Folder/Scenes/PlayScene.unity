@@ -251,13 +251,13 @@ MonoBehaviour:
   groundRock: {fileID: 100000, guid: e2abe2db222fa9c49a111c088001ebcf, type: 3}
   Marble: {fileID: 4753294543171744885, guid: 521cdb075585646fd8017314e9270f7e, type: 3}
   num_marbles: 5
-  width: 145
-  height: 123
+  width: 173
+  height: 164
   passageWidth: 7
-  seed: 10
-  useRandomSeed: 1
-  randomFillPercent: 46
-  wallThresholdSize: 72
+  seed: 1000
+  useRandomSeed: 0
+  randomFillPercent: 48
+  wallThresholdSize: 50
   roomThresholdSize: 64
 --- !u!4 &509230443
 Transform:
