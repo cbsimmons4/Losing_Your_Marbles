@@ -15,20 +15,25 @@ public class MapGenerator : MonoBehaviour {
 
     public GameObject groundRock;
 
-    [Range(75, 200)]
+    public Transform Marble;
+
+    [Range(1, 50)]
+    public int num_marbles;
+
+    [Range(75, 201)]
     public int width;
 
-    [Range(75, 200)]
+    [Range(75, 201)]
     public int height;
 
-    [Range(5, 15)]
+    [Range(5, 10)]
     public int passageWidth;
 
 	public string seed;
 
 	public bool useRandomSeed;
 
-	[Range(30,70)]
+	[Range(35,55)]
 	public int randomFillPercent;
 
 	private int[,] map;
@@ -42,14 +47,50 @@ public class MapGenerator : MonoBehaviour {
     private int center_x;
     private int center_z;
 
+    public System.Random pseudoRandom;
+
     private List<KeyValuePair<int, int>> open_spaces;
 
     void Awake() {
-        this.center_x = this.width/2;
-        this.center_z = this.height/2;
+        if (this.width % 2 == 0)
+        {
+            this.width++;
+        }
+        if(this.height % 2 == 0) {
+            this.height++;
+        }
+
+        if (useRandomSeed)
+        {
+            pseudoRandom = new System.Random();
+        }
+        else
+        {
+            pseudoRandom = new System.Random(seed.GetHashCode());
+        }
+
+        this.center_x = this.width/2 - 1;
+        this.center_z = this.height/2 - 1;
 		GenerateMap();
         this.open_spaces = this.Get_OpenSpaces();
+        this.Spawn_Marbles();
+
 	}
+
+    private void Spawn_Marbles() {
+
+        List<KeyValuePair<int, int>> spaces = new List<KeyValuePair<int, int>>(this.open_spaces);
+
+        for ( int i = 0; i < this.num_marbles; i++) {
+            KeyValuePair<int, int> cur_position = spaces[this.pseudoRandom.Next(0, open_spaces.Count)];
+            spaces.Remove(cur_position);
+            float x = cur_position.Key;
+            float y = cur_position.Value;
+            Transform cur = Instantiate(this.Marble, new Vector3 ( (x - this.width / 2) - 1,.5f, (y - this.height / 2) - 1 ), this.Marble.transform.rotation);
+            cur.transform.parent = GameObject.Find("Marbles").transform;
+        }
+
+    }
 
     public List<KeyValuePair<int, int>> Get_OS() 
     {
@@ -70,9 +111,9 @@ public class MapGenerator : MonoBehaviour {
 			SmoothMap();
 		}
 
-		ProcessMap ();
+
+        ProcessMap ();
         makeSpawnArea();
-       
 
         int borderSize = 1;
 		int[,] borderedMap = new int[width + borderSize * 2,height + borderSize * 2];
@@ -106,7 +147,7 @@ public class MapGenerator : MonoBehaviour {
             {
 
                 if (map[x, y] == 0 
-                && !(map[x+1, y] == 1 || map[x - 1, y] == 1 || map[x, y + 1 ] == 1 || map[x, y - 1] == 1) ) {
+                && !( ( x==this.center_x && y == this.center_z ) ||  map[x+1, y] == 1 || map[x - 1, y] == 1 || map[x, y + 1 ] == 1 || map[x, y - 1] == 1) ) {
                     os.Add(new KeyValuePair<int, int>(x, y));
                 }
 
@@ -142,7 +183,7 @@ public class MapGenerator : MonoBehaviour {
                 {
                     var cur = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     //Instantiate(groundRock, new Vector3 ( (x - this.width / 2) - 1,.5f, (y - this.height / 2) - 1 ), groundRock.transform.rotation);
-                    cur.transform.position = new Vector3( (x-this.width/2) , 0, (y-this.height/2) );
+                    cur.transform.position = new Vector3( (x-this.width/2) - 1 , 0, (y-this.height/2) - 1 );
                     cur.transform.parent = GameObject.Find("NavCreators").transform;
                     NavMeshObstacle ob_cur = cur.AddComponent<NavMeshObstacle>();
                     cur.GetComponent<BoxCollider>().enabled = false;
@@ -394,17 +435,7 @@ public class MapGenerator : MonoBehaviour {
 
 
 	void RandomFillMap() {
-        System.Random pseudoRandom;
-
-        if (useRandomSeed) {
-            pseudoRandom = new System.Random();
-        }
-        else
-        {
-            pseudoRandom = new System.Random(seed.GetHashCode());
-        }
-
-
+       
         for (int x = 0; x < width; x ++) {
 			for (int y = 0; y < height; y ++) {
                 if (x == 0 || x == width - 1 || y == 0 || y == height - 1)
