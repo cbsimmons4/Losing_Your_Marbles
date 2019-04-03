@@ -134,8 +134,8 @@ public class MapGenerator : MonoBehaviour {
 
         MakeNavigationMesh(borderedMap);
 
-		MeshGenerator meshGen = GetComponent<MeshGenerator>();
-		meshGen.GenerateMesh(borderedMap, 1);
+		//MeshGenerator meshGen = GetComponent<MeshGenerator>();
+		//meshGen.GenerateMesh(borderedMap, 1);
 	}
 
     private List<KeyValuePair<int, int>> Get_OpenSpaces()
@@ -181,16 +181,22 @@ public class MapGenerator : MonoBehaviour {
 
                 if (borderedMap[x, y] == 1)
                 {
-                    var cur = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    if(x == 0 || y == 0 || x == borderedMap.GetLength(0) -1 || y == borderedMap.GetLength(1) - 1 
+                        || borderedMap[x + 1, y] == 0 || borderedMap[x - 1 , y] == 0 || borderedMap[x , y + 1] == 0 || borderedMap[x, y - 1] == 0) {
+                        GameObject cur = Instantiate(groundRock, new Vector3 ( (x - this.width / 2) - 1,.5f, (y - this.height / 2) - 1 ), groundRock.transform.rotation);
+                        cur.transform.parent = GameObject.Find("NavCreators").transform;
+                    }
+
+                    //var cur = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     //Instantiate(groundRock, new Vector3 ( (x - this.width / 2) - 1,.5f, (y - this.height / 2) - 1 ), groundRock.transform.rotation);
-                    cur.transform.position = new Vector3( (x-this.width/2) - 1 , 0, (y-this.height/2) - 1 );
-                    cur.transform.parent = GameObject.Find("NavCreators").transform;
-                    NavMeshObstacle ob_cur = cur.AddComponent<NavMeshObstacle>();
-                    cur.GetComponent<BoxCollider>().enabled = false;
-                    cur.GetComponent<Renderer>().enabled = false;
-                    ob_cur.enabled = true;
-                    ob_cur.carving = true;
-                    ob_cur.radius = .6f;
+                    //cur.transform.position = new Vector3( (x-this.width/2) - 1 , 0, (y-this.height/2) - 1 );
+                    //cur.transform.parent = GameObject.Find("NavCreators").transform;
+                    //NavMeshObstacle ob_cur = cur.AddComponent<NavMeshObstacle>();
+                    //cur.GetComponent<BoxCollider>().enabled = false;
+                    //cur.GetComponent<Renderer>().enabled = false;
+                    //ob_cur.enabled = true;
+                    //ob_cur.carving = true;
+                    //ob_cur.radius = .6f;
                    
                 }
             }
