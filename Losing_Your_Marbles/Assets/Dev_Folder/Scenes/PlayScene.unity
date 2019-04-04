@@ -688,7 +688,7 @@ MonoBehaviour:
   passageWidth: 6
   seed: 100
   useRandomSeed: 1
-  randomFillPercent: 50
+  randomFillPercent: 48
   wallThresholdSize: 60
   roomThresholdSize: 60
   disableMinimap: 0
