@@ -89,7 +89,7 @@ public class MapGenerator : MonoBehaviour {
         List<KeyValuePair<int, int>> spaces = new List<KeyValuePair<int, int>>(this.open_spaces);
 
         for ( int i = 0; i < this.num_marbles; i++) {
-            KeyValuePair<int, int> cur_position = spaces[this.pseudoRandom.Next(0, open_spaces.Count)];
+            KeyValuePair<int, int> cur_position = spaces[this.pseudoRandom.Next(0, open_spaces.Count-1)];
             spaces.Remove(cur_position);
             float x = cur_position.Key;
             float y = cur_position.Value;
@@ -130,7 +130,6 @@ public class MapGenerator : MonoBehaviour {
 				if (x >= borderSize && x < width + borderSize && y >= borderSize && y < height + borderSize) {
 					borderedMap[x,y] = map[x-borderSize,y-borderSize];
 				}
-
                 else {
 					borderedMap[x,y] = 1;
 				}
@@ -152,14 +151,13 @@ public class MapGenerator : MonoBehaviour {
         {
             for (int y = 0; y < map.GetLength(1); y++)
             {
-
-                if (map[x, y] == 0 
-                && !( ( x==this.center_x && y == this.center_z ) ||  map[x+1, y] == 1 || map[x - 1, y] == 1 || map[x, y + 1 ] == 1 || map[x, y - 1] == 1) ) {
+               
+                if (map[x, y] == 0 && !(Vector3.Distance(new Vector3(x, 0, y), new Vector3(center_x, 0, center_z)) < 18f)
+                && !(map[x+1, y] == 1 || map[x - 1, y] == 1 || map[x, y + 1 ] == 1 || map[x, y - 1] == 1) ) {
                     os.Add(new KeyValuePair<int, int>(x, y));
                 }
-
-              
             }
+
         }
         return os;
     }
