@@ -44,6 +44,8 @@ public class MapGenerator : MonoBehaviour {
     [Range(20, 100)]
     public int roomThresholdSize;
 
+    public bool disableMinimap;
+
     private int center_x;
     private int center_z;
 
@@ -52,6 +54,7 @@ public class MapGenerator : MonoBehaviour {
     private List<KeyValuePair<int, int>> open_spaces;
 
     void Awake() {
+
         if (this.width % 2 == 0)
         {
             this.width++;
@@ -67,6 +70,10 @@ public class MapGenerator : MonoBehaviour {
         else
         {
             pseudoRandom = new System.Random(seed.GetHashCode());
+        }
+        if (disableMinimap)
+        {
+            GameObject.Find("Minimap").active = false;
         }
 
         this.center_x = this.width/2 - 1;
@@ -183,21 +190,18 @@ public class MapGenerator : MonoBehaviour {
                 {
                     if(x == 0 || y == 0 || x == borderedMap.GetLength(0) -1 || y == borderedMap.GetLength(1) - 1 
                         || borderedMap[x + 1, y] == 0 || borderedMap[x - 1 , y] == 0 || borderedMap[x , y + 1] == 0 || borderedMap[x, y - 1] == 0) {
-                        GameObject cur = Instantiate(groundRock, new Vector3 ( (x - this.width / 2) - 1,.5f, (y - this.height / 2) - 1 ), groundRock.transform.rotation);
+                        Vector3 cur_pos = new Vector3( (x - this.width / 2) - 1,.5f, (y - this.height / 2) - 1 );
+                        GameObject cur = Instantiate(groundRock,cur_pos, groundRock.transform.rotation);
+                        cur.transform.Rotate(this.pseudoRandom.Next(0, 2), this.pseudoRandom.Next(0, 360), this.pseudoRandom.Next(0, 2));
                         cur.transform.parent = GameObject.Find("NavCreators").transform;
                     }
-
-                    //var cur = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                    //Instantiate(groundRock, new Vector3 ( (x - this.width / 2) - 1,.5f, (y - this.height / 2) - 1 ), groundRock.transform.rotation);
-                    //cur.transform.position = new Vector3( (x-this.width/2) - 1 , 0, (y-this.height/2) - 1 );
-                    //cur.transform.parent = GameObject.Find("NavCreators").transform;
-                    //NavMeshObstacle ob_cur = cur.AddComponent<NavMeshObstacle>();
-                    //cur.GetComponent<BoxCollider>().enabled = false;
-                    //cur.GetComponent<Renderer>().enabled = false;
-                    //ob_cur.enabled = true;
-                    //ob_cur.carving = true;
-                    //ob_cur.radius = .6f;
-                   
+                    else
+                    {
+                        var cur = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                        cur.transform.position = new Vector3((x - this.width / 2) - 1, 9, (y - this.height / 2) - 1);
+                        cur.transform.parent = GameObject.Find("MiniMapWalls").transform;
+                        cur.GetComponent<Renderer>().material.color = Color.black;
+                    }
                 }
             }
         }
