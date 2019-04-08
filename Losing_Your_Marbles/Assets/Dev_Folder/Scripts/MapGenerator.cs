@@ -93,7 +93,7 @@ public class MapGenerator : MonoBehaviour {
             spaces.Remove(cur_position);
             float x = cur_position.Key;
             float y = cur_position.Value;
-            Transform cur = Instantiate(this.Marble, new Vector3 ( (x - this.width / 2) - 1,.5f, (y - this.height / 2) - 1 ), this.Marble.transform.rotation);
+            Transform cur = Instantiate(this.Marble, new Vector3 ( ((x - this.width / 2) - 1) * 2,.5f, ( (y - this.height / 2) - 1 )*2), this.Marble.transform.rotation);
             cur.transform.parent = GameObject.Find("Marbles").transform;
         }
 
@@ -188,7 +188,7 @@ public class MapGenerator : MonoBehaviour {
                 {
                     if(x == 0 || y == 0 || x == borderedMap.GetLength(0) -1 || y == borderedMap.GetLength(1) - 1 
                         || borderedMap[x + 1, y] == 0 || borderedMap[x - 1 , y] == 0 || borderedMap[x , y + 1] == 0 || borderedMap[x, y - 1] == 0) {
-                        Vector3 cur_pos = new Vector3( (x - this.width / 2) - 1,.5f, (y - this.height / 2) - 1 );
+                        Vector3 cur_pos = new Vector3( ((x - this.width / 2) - 1)*2,.5f, ((y - this.height / 2) - 1)*2 );
                         GameObject cur = Instantiate(groundRock,cur_pos, groundRock.transform.rotation);
                         cur.transform.Rotate(this.pseudoRandom.Next(0, 2), this.pseudoRandom.Next(0, 360), this.pseudoRandom.Next(0, 2));
                         cur.transform.parent = GameObject.Find("NavCreators").transform;
@@ -196,7 +196,7 @@ public class MapGenerator : MonoBehaviour {
                     else
                     {
                         var cur = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                        cur.transform.position = new Vector3((x - this.width / 2) - 1, 9, (y - this.height / 2) - 1);
+                        cur.transform.position = new Vector3(((x - this.width / 2) - 1)*2, 9, ((y - this.height / 2) - 1)*2);
                         cur.transform.parent = GameObject.Find("MiniMapWalls").transform;
                         cur.GetComponent<Renderer>().material.color = Color.black;
                     }
