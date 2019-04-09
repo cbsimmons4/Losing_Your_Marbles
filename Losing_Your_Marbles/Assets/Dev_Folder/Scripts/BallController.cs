@@ -20,10 +20,11 @@ public class BallController : MonoBehaviour
         agent.enabled = true;
         this.PickNewDistination();
     }
+
     void PickNewDistination()
     {
         KeyValuePair<int, int> space = open_spaces[Random.Range(0, open_spaces.Count)];
-        this.destination = new Vector3(((space.Key - mg.width/2) - 1) * 2 , 0, ((space.Value - mg.height/2) - 1) * 2);
+        this.destination = new Vector3( (space.Key - mg.GetCenterX()) * 2 , 0, (space.Value - mg.GetCenterZ()) * 2);
         agent.SetDestination(this.destination);
     }
 

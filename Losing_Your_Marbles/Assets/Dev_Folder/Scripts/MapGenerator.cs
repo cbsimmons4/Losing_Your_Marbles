@@ -53,15 +53,9 @@ public class MapGenerator : MonoBehaviour {
 
     private List<KeyValuePair<int, int>> open_spaces;
 
-    void Awake() {
+    int marbles_spawned;
 
-        if (this.width % 2 == 0)
-        {
-            this.width++;
-        }
-        if(this.height % 2 == 0) {
-            this.height++;
-        }
+    void Awake() {
 
         if (useRandomSeed)
         {
@@ -71,13 +65,14 @@ public class MapGenerator : MonoBehaviour {
         {
             pseudoRandom = new System.Random(seed.GetHashCode());
         }
+
         if (disableMinimap)
         {
-            GameObject.Find("Minimap").active = false;
+            GameObject.Find("Minimap").SetActive(false);
         }
 
-        this.center_x = this.width/2 - 1;
-        this.center_z = this.height/2 - 1;
+        this.center_x = this.width/2;
+        this.center_z = this.height/2;
 		GenerateMap();
         this.open_spaces = this.Get_OpenSpaces();
         this.Spawn_Marbles();
@@ -87,16 +82,19 @@ public class MapGenerator : MonoBehaviour {
     private void Spawn_Marbles() {
 
         List<KeyValuePair<int, int>> spaces = new List<KeyValuePair<int, int>>(this.open_spaces);
+        this.marbles_spawned = 0;
 
         for ( int i = 0; i < this.num_marbles; i++) {
-            KeyValuePair<int, int> cur_position = spaces[this.pseudoRandom.Next(0, open_spaces.Count-1)];
-            spaces.Remove(cur_position);
-            float x = cur_position.Key;
-            float y = cur_position.Value;
-            Transform cur = Instantiate(this.Marble, new Vector3 ( ((x - this.width / 2) - 1) * 2,.5f, ( (y - this.height / 2) - 1 )*2), this.Marble.transform.rotation);
-            cur.transform.parent = GameObject.Find("Marbles").transform;
+            if (spaces.Count > 0) {
+                KeyValuePair<int, int> cur_position = spaces[this.pseudoRandom.Next(0, open_spaces.Count)];
+                spaces.Remove(cur_position);
+                float x = cur_position.Key;
+                float y = cur_position.Value;
+                Transform cur = Instantiate(this.Marble, new Vector3((x - this.center_x) * 2, .5f, (y - this.center_z) * 2), this.Marble.transform.rotation);
+                cur.transform.parent = GameObject.Find("Marbles").transform;
+                this.marbles_spawned++;
+            }
         }
-
     }
 
     public List<KeyValuePair<int, int>> Get_OS() 
@@ -104,20 +102,13 @@ public class MapGenerator : MonoBehaviour {
         return open_spaces;
     }
 
-    void Update() {
-		//if (Input.GetKey(KeyCode.R) ) {
-			//GenerateMap();
-		//}
-	}
-
-	void GenerateMap() {
+    void GenerateMap() {
 		map = new int[width,height];
 		RandomFillMap();
 
 		for (int i = 0; i < 10; i ++) {
 			SmoothMap();
 		}
-
 
         ProcessMap ();
         makeSpawnArea();
@@ -150,9 +141,8 @@ public class MapGenerator : MonoBehaviour {
         for (int x = 0; x < map.GetLength(0); x++)
         {
             for (int y = 0; y < map.GetLength(1); y++)
-            {
-               
-                if (map[x, y] == 0 && !(Vector3.Distance(new Vector3(x, 0, y), new Vector3(center_x, 0, center_z)) < 18f)
+            { 
+            if (map[x, y] == 0 && !(Vector3.Distance(new Vector3(x, 0, y), new Vector3(center_x, 0, center_z)) < 18f)
                 && !(map[x+1, y] == 1 || map[x - 1, y] == 1 || map[x, y + 1 ] == 1 || map[x, y - 1] == 1) ) {
                     os.Add(new KeyValuePair<int, int>(x, y));
                 }
@@ -178,7 +168,6 @@ public class MapGenerator : MonoBehaviour {
 
     void MakeNavigationMesh(int[,] borderedMap) 
     {
-        List<GameObject> objects = new List<GameObject>();
         for (int x = 0; x < borderedMap.GetLength(0); x++)
         {
             for (int y = 0; y < borderedMap.GetLength(1); y++)
@@ -188,18 +177,16 @@ public class MapGenerator : MonoBehaviour {
                 {
                     if(x == 0 || y == 0 || x == borderedMap.GetLength(0) -1 || y == borderedMap.GetLength(1) - 1 
                         || borderedMap[x + 1, y] == 0 || borderedMap[x - 1 , y] == 0 || borderedMap[x , y + 1] == 0 || borderedMap[x, y - 1] == 0) {
-                        Vector3 cur_pos = new Vector3( ((x - this.width / 2) - 1)*2,.5f, ((y - this.height / 2) - 1)*2 );
+                        Vector3 cur_pos = new Vector3( (x - this.center_x) * 2,.5f, (y - this.center_z) * 2 );
                         GameObject cur = Instantiate(groundRock,cur_pos, groundRock.transform.rotation);
                         cur.transform.Rotate(this.pseudoRandom.Next(0, 2), this.pseudoRandom.Next(0, 360), this.pseudoRandom.Next(0, 2));
                         cur.transform.parent = GameObject.Find("NavCreators").transform;
                     }
-                    else
-                    {
-                        var cur = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                        cur.transform.position = new Vector3(((x - this.width / 2) - 1)*2, 9, ((y - this.height / 2) - 1)*2);
-                        cur.transform.parent = GameObject.Find("MiniMapWalls").transform;
-                        cur.GetComponent<Renderer>().material.color = Color.black;
-                    }
+
+                    var mini = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    mini.transform.position = new Vector3( ((x - this.center_x) * 2 ), 9, (y - this.center_z) * 2);
+                    mini.transform.parent = GameObject.Find("MiniMapWalls").transform;
+                    mini.GetComponent<Renderer>().material.color = Color.black;
                 }
             }
         }
@@ -443,7 +430,6 @@ public class MapGenerator : MonoBehaviour {
 
 
 	void RandomFillMap() {
-       
         for (int x = 0; x < width; x ++) {
 			for (int y = 0; y < height; y ++) {
                 if (x == 0 || x == width - 1 || y == 0 || y == height - 1)
@@ -565,6 +551,16 @@ public class MapGenerator : MonoBehaviour {
         return this.map;
     }
 
+    public int GetCenterX()
+    {
+        return this.center_x;
+    }
+
+    public int GetCenterZ() 
+    {
+        return this.center_z;
+    }
+
     public int GetHeight() 
     {
         return this.height;
@@ -573,6 +569,26 @@ public class MapGenerator : MonoBehaviour {
     public int GetWidth()
     {
         return this.width;
+    }
+
+    public int Get_num_Marbles()
+    {
+        return this.num_marbles;
+    }
+
+
+    public void DisableMiniMap()
+    {
+        this.disableMinimap = true;
+    }
+
+    public void EnableMiniMap()
+    {
+        this.disableMinimap = false;
+    }
+
+    public int Get_Marbles_Spawned() {
+        return this.marbles_spawned;
     }
 
 }
