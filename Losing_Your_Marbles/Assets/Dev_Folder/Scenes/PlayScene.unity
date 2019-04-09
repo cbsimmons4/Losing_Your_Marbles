@@ -500,6 +500,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: grimbrand
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 5f9b176058917ba49a8059f6da098866, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5f9b176058917ba49a8059f6da098866, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1
@@ -942,16 +946,27 @@ MonoBehaviour:
   groundRock: {fileID: 5429328472653404370, guid: 37a3cd4b5204941dba1c3c0197c38898,
     type: 3}
   Marble: {fileID: 4753294543171744885, guid: 521cdb075585646fd8017314e9270f7e, type: 3}
-  num_marbles: 20
-  width: 150
-  height: 150
+  num_marbles: 15
+  width: 160
+  height: 160
   passageWidth: 6
   seed: 100
   useRandomSeed: 1
   randomFillPercent: 50
   wallThresholdSize: 50
   roomThresholdSize: 50
+  forest_density: 2
   disableMinimap: 0
+  obsticles:
+  - {fileID: 100000, guid: 6aab193b7693b5e4c9741f1917d2987c, type: 3}
+  - {fileID: 100000, guid: c91c1eb85782d5748ace27eb4d7415bb, type: 3}
+  - {fileID: 100016, guid: 469edab27ab6d004d84af2c4a851bd7f, type: 3}
+  decorations:
+  - {fileID: 100000, guid: 53414ab72ac45614684af7a6985b2c85, type: 3}
+  - {fileID: 100000, guid: 35483354210b51844a7110a01c7b4f3a, type: 3}
+  - {fileID: 100000, guid: e26c36c102d821c4581a911b1e80588f, type: 3}
+  - {fileID: 100000, guid: 532066205bc320d4aa4647332e9d2ffa, type: 3}
+  - {fileID: 100000, guid: ebc45ba3ff076884e92c0f152cc3b98e, type: 3}
 --- !u!4 &509230443
 Transform:
   m_ObjectHideFlags: 0
@@ -1039,7 +1054,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4b774417f90b64df8a7828639ffda783, type: 2}
+  - {fileID: 2100000, guid: 26769458dbbfb4672b0a24894b1ae61e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

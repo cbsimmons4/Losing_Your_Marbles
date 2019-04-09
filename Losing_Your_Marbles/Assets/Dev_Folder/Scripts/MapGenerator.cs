@@ -3,6 +3,7 @@ using UnityEngine.AI;
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using Random = UnityEngine.Random;
 
 /*
  * Procedural cave generation code
@@ -20,10 +21,10 @@ public class MapGenerator : MonoBehaviour {
     [Range(1, 50)]
     public int num_marbles;
 
-    [Range(75, 255)]
+    [Range(85, 255)]
     public int width;
 
-    [Range(75, 255)]
+    [Range(85, 255)]
     public int height;
 
     [Range(5, 10)]
@@ -44,6 +45,9 @@ public class MapGenerator : MonoBehaviour {
     [Range(20, 100)]
     public int roomThresholdSize;
 
+    [Range(0, 4)]
+    public int forest_density;
+
     public bool disableMinimap;
 
     private int center_x;
@@ -54,6 +58,10 @@ public class MapGenerator : MonoBehaviour {
     private List<KeyValuePair<int, int>> open_spaces;
 
     int marbles_spawned;
+
+    public List<GameObject> obsticles;
+
+    public List<GameObject> decorations;
 
     void Awake() {
 
@@ -74,10 +82,46 @@ public class MapGenerator : MonoBehaviour {
         this.center_x = this.width/2;
         this.center_z = this.height/2;
 		GenerateMap();
-        this.open_spaces = this.Get_OpenSpaces();
-        this.Spawn_Marbles();
 
 	}
+
+    private void add_decorations() {
+        foreach (KeyValuePair<int, int> space in this.open_spaces)
+        {
+            if (Random.Range(1, 50) < this.forest_density)
+            {
+                Vector3 cur_pos = new Vector3((space.Key - this.center_x) * 2, 0, (space.Value - this.center_z) * 2);
+                GameObject obj = this.decorations[Random.Range(0, this.decorations.Count)];
+                GameObject cur = Instantiate(obj, cur_pos, obj.transform.rotation);
+                cur.transform.Rotate(this.pseudoRandom.Next(0, 2), this.pseudoRandom.Next(0, 360), this.pseudoRandom.Next(0, 2));
+                cur.transform.parent = GameObject.Find("NavCreators").transform;
+
+            }
+        }
+    }
+
+    private void add_obsticles() {
+
+        List<KeyValuePair<int, int>> to_remove = new List<KeyValuePair<int, int>> ();
+
+        foreach (KeyValuePair<int, int> space in  this.open_spaces)
+        {
+            if (Random.Range(1,50) < this.forest_density)
+            {
+                Vector3 cur_pos = new Vector3((space.Key - this.center_x) * 2, 0, (space.Value - this.center_z) * 2) ;
+                GameObject obj = this.obsticles[Random.Range(0, this.obsticles.Count)];
+                GameObject cur = Instantiate(obj, cur_pos - new Vector3(0, 0.25f,0), obj.transform.rotation);
+                cur.transform.Rotate(this.pseudoRandom.Next(0, 2), this.pseudoRandom.Next(0, 360), this.pseudoRandom.Next(0, 2));
+                cur.transform.parent = GameObject.Find("NavCreators").transform;
+                to_remove.Add(space);
+            }
+        }
+        foreach (KeyValuePair<int, int> space in to_remove)
+        {
+            this.open_spaces.Remove(space);
+        }
+    }
+
 
     private void Spawn_Marbles() {
 
@@ -86,7 +130,7 @@ public class MapGenerator : MonoBehaviour {
 
         for ( int i = 0; i < this.num_marbles; i++) {
             if (spaces.Count > 0) {
-                KeyValuePair<int, int> cur_position = spaces[this.pseudoRandom.Next(0, open_spaces.Count)];
+                KeyValuePair<int, int> cur_position = spaces[this.pseudoRandom.Next(0, open_spaces.Count - 1)];
                 spaces.Remove(cur_position);
                 float x = cur_position.Key;
                 float y = cur_position.Value;
@@ -129,11 +173,17 @@ public class MapGenerator : MonoBehaviour {
 
         map = borderedMap;
 
-        MakeNavigationMesh(borderedMap);
+        this.open_spaces = this.Get_OpenSpaces();
+       
+        this.Place_Walls(borderedMap);
+        this.add_obsticles();
 
-		//MeshGenerator meshGen = GetComponent<MeshGenerator>();
-		//meshGen.GenerateMesh(borderedMap, 1);
-	}
+        var ground = GameObject.Find("Ground").GetComponent<NavMeshSurface>();
+        ground.BuildNavMesh();
+        add_decorations();
+        this.Spawn_Marbles();
+
+    }
 
     private List<KeyValuePair<int, int>> Get_OpenSpaces()
     {
@@ -166,7 +216,7 @@ public class MapGenerator : MonoBehaviour {
         }
     }
 
-    void MakeNavigationMesh(int[,] borderedMap) 
+    void Place_Walls(int[,] borderedMap) 
     {
         for (int x = 0; x < borderedMap.GetLength(0); x++)
         {
@@ -175,9 +225,9 @@ public class MapGenerator : MonoBehaviour {
 
                 if (borderedMap[x, y] == 1)
                 {
-                    if(x == 0 || y == 0 || x == borderedMap.GetLength(0) -1 || y == borderedMap.GetLength(1) - 1 
-                        || borderedMap[x + 1, y] == 0 || borderedMap[x - 1 , y] == 0 || borderedMap[x , y + 1] == 0 || borderedMap[x, y - 1] == 0) {
-                        Vector3 cur_pos = new Vector3( (x - this.center_x) * 2,.5f, (y - this.center_z) * 2 );
+                    if (x == 0 || y == 0 || x == borderedMap.GetLength(0) - 1 || y == borderedMap.GetLength(1) - 1
+                        || borderedMap[x + 1, y] == 0 || borderedMap[x - 1, y] == 0 || borderedMap[x, y + 1] == 0 || borderedMap[x, y - 1] == 0) {
+                        Vector3 cur_pos = new Vector3((x - this.center_x) * 2, .5f, (y - this.center_z) * 2);
                         GameObject cur = Instantiate(groundRock,cur_pos, groundRock.transform.rotation);
                         cur.transform.Rotate(this.pseudoRandom.Next(0, 2), this.pseudoRandom.Next(0, 360), this.pseudoRandom.Next(0, 2));
                         cur.transform.parent = GameObject.Find("NavCreators").transform;
@@ -192,8 +242,6 @@ public class MapGenerator : MonoBehaviour {
             }
         }
 
-        var ground = GameObject.Find("Ground").GetComponent<NavMeshSurface>();
-        ground.BuildNavMesh();
     }
 
     void ProcessMap() {
