@@ -20,10 +20,10 @@ RenderSettings:
   m_FogDensity: 1
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
-  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
-  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientSkyColor: {r: 34.701454, g: 34.701454, b: 34.701454, a: 1}
+  m_AmbientEquatorColor: {r: 1024, g: 1024, b: 1024, a: 1}
+  m_AmbientGroundColor: {r: 1, g: 1, b: 1, a: 1}
+  m_AmbientIntensity: 5.73
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: e222162ddb8d34547a133b673221b195, type: 2}
@@ -574,7 +574,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &223723096
 Light:
   m_ObjectHideFlags: 0
@@ -654,7 +654,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 225753897}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2000, z: 0}
   m_LocalScale: {x: 52, y: 1, z: 52}
   m_Children:
   - {fileID: 270869812}
@@ -943,14 +943,14 @@ MonoBehaviour:
     type: 3}
   Marble: {fileID: 4753294543171744885, guid: 521cdb075585646fd8017314e9270f7e, type: 3}
   num_marbles: 20
-  width: 255
-  height: 255
+  width: 150
+  height: 150
   passageWidth: 6
   seed: 100
   useRandomSeed: 1
   randomFillPercent: 50
-  wallThresholdSize: 100
-  roomThresholdSize: 20
+  wallThresholdSize: 50
+  roomThresholdSize: 50
   disableMinimap: 0
 --- !u!4 &509230443
 Transform:
@@ -1523,14 +1523,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1172353333}
-  m_LocalRotation: {x: -0.000000115202326, y: -0.7071068, z: 0.7071068, w: -0.000000115202326}
-  m_LocalPosition: {x: 0, y: 492, z: 0}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.70710677}
+  m_LocalPosition: {x: 0, y: 2525, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 935680453}
   m_Father: {fileID: 679479073}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90.00001, y: 0, z: 0}
 --- !u!20 &1172353336
 Camera:
   m_ObjectHideFlags: 0
@@ -1591,7 +1591,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1485404420
 Transform:
   m_ObjectHideFlags: 0

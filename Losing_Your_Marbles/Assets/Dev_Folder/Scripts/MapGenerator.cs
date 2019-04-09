@@ -184,8 +184,9 @@ public class MapGenerator : MonoBehaviour {
                     }
 
                     var mini = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                    mini.transform.position = new Vector3( ((x - this.center_x) * 2 ), 9, (y - this.center_z) * 2);
+                    mini.transform.position = new Vector3( ((x - this.center_x) * 2 ), 2009, (y - this.center_z) * 2);
                     mini.transform.parent = GameObject.Find("MiniMapWalls").transform;
+                    mini.transform.localScale = 2 * mini.transform.localScale;
                     mini.GetComponent<Renderer>().material.color = Color.black;
                 }
             }
