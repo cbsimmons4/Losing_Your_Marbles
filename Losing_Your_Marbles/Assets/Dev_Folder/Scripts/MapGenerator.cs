@@ -41,11 +41,11 @@ public class MapGenerator : MonoBehaviour {
 
     [Range(20, 100)]
     public int wallThresholdSize;
-
+    
     [Range(20, 100)]
     public int roomThresholdSize;
 
-    [Range(0, 4)]
+    [Range(0, 3)]
     public int forest_density;
 
     public bool disableMinimap;
@@ -192,7 +192,7 @@ public class MapGenerator : MonoBehaviour {
         {
             for (int y = 0; y < map.GetLength(1); y++)
             { 
-            if (map[x, y] == 0 && !(Vector3.Distance(new Vector3(x, 0, y), new Vector3(center_x, 0, center_z)) < 18f)
+            if (map[x, y] == 0 && !(Vector3.Distance(new Vector3(x, 0, y), new Vector3(center_x, 0, center_z)) < 15f)
                 && !(map[x+1, y] == 1 || map[x - 1, y] == 1 || map[x, y + 1 ] == 1 || map[x, y - 1] == 1) ) {
                     os.Add(new KeyValuePair<int, int>(x, y));
                 }
