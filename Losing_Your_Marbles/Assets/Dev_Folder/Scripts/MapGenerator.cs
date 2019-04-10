@@ -21,10 +21,10 @@ public class MapGenerator : MonoBehaviour {
     [Range(1, 50)]
     public int num_marbles;
 
-    [Range(85, 255)]
+    [Range(100, 255)]
     public int width;
 
-    [Range(85, 255)]
+    [Range(100, 255)]
     public int height;
 
     [Range(5, 10)]
@@ -88,7 +88,7 @@ public class MapGenerator : MonoBehaviour {
     private void add_decorations() {
         foreach (KeyValuePair<int, int> space in this.open_spaces)
         {
-            if (Random.Range(1, 50) < this.forest_density)
+            if (Random.Range(1, 50) < this.forest_density + 1)
             {
                 Vector3 cur_pos = new Vector3((space.Key - this.center_x) * 2, 0, (space.Value - this.center_z) * 2);
                 GameObject obj = this.decorations[Random.Range(0, this.decorations.Count)];
@@ -130,7 +130,7 @@ public class MapGenerator : MonoBehaviour {
 
         for ( int i = 0; i < this.num_marbles; i++) {
             if (spaces.Count > 0) {
-                KeyValuePair<int, int> cur_position = spaces[this.pseudoRandom.Next(0, open_spaces.Count - 1)];
+                KeyValuePair<int, int> cur_position = spaces[this.pseudoRandom.Next(0, open_spaces.Count)];
                 spaces.Remove(cur_position);
                 float x = cur_position.Key;
                 float y = cur_position.Value;
