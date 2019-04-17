@@ -959,16 +959,16 @@ MonoBehaviour:
   groundRock: {fileID: 5429328472653404370, guid: 37a3cd4b5204941dba1c3c0197c38898,
     type: 3}
   Marble: {fileID: 4753294543171744885, guid: 521cdb075585646fd8017314e9270f7e, type: 3}
-  num_marbles: 50
-  width: 255
-  height: 255
+  num_marbles: 15
+  width: 150
+  height: 150
   passageWidth: 6
   seed: 100
   useRandomSeed: 1
-  randomFillPercent: 55
+  randomFillPercent: 50
   wallThresholdSize: 50
   roomThresholdSize: 50
-  forest_density: 3
+  forest_density: 2
   disableMinimap: 0
   obsticles:
   - {fileID: 100000, guid: 6aab193b7693b5e4c9741f1917d2987c, type: 3}
