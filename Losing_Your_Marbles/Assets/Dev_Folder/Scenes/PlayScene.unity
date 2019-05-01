@@ -507,6 +507,11 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 7643728322225168851, guid: c6453f8e1f814744d8b94e5a6d1f9942,
+        type: 3}
+      propertyPath: m_Carve
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 3}
 --- !u!1 &195109149
@@ -958,7 +963,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundRock: {fileID: 5429328472653404370, guid: 37a3cd4b5204941dba1c3c0197c38898,
     type: 3}
-  Marble: {fileID: 4753294543171744885, guid: 521cdb075585646fd8017314e9270f7e, type: 3}
+  Marble: {fileID: 4753294543171744879, guid: 521cdb075585646fd8017314e9270f7e, type: 3}
   num_marbles: 15
   width: 150
   height: 150

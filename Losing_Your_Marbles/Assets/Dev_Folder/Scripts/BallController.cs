@@ -9,21 +9,28 @@ public class BallController : MonoBehaviour
     //Vector3 destination;
     //int[,] map;
     NavMeshAgent agent;
+    Rigidbody rb;
+    Animator anim;
     //MapGenerator mg;
 
     public float wanderRadius;
     public float wanderTimer;
+    //public GameObject player;
     private Transform target;
     private float timer;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        rb = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
         //mg = GameObject.Find("Map Generator").GetComponent<MapGenerator>();
         //open_spaces = mg.Get_OS();
         //map = mg.Get_map();
         agent.enabled = true;
         agent.updateRotation = true;
+     //   agent.updatePosition = false;
+
     }
 
     void Update()
@@ -33,10 +40,13 @@ public class BallController : MonoBehaviour
         if (timer >= wanderTimer)
         {
             Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
+            anim.SetBool("isRolling", true);
             agent.SetDestination(newPos);
             timer = 0;
+            anim.SetBool("isRolling", false);
         }
     }
+
 
     public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask) {
         Vector3 randDirection = Random.insideUnitSphere * dist;
