@@ -131,6 +131,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wanderRadius: 40
   wanderTimer: 3
+  materials:
+  - {fileID: 2100000, guid: 2381129e1234e46568b46ad721d740b9, type: 2}
+  - {fileID: 2100000, guid: 70e3ed334e8a3498a8263aa0c86cd69a, type: 2}
+  - {fileID: 2100000, guid: d2bdd46fdf80749adbd0127990412746, type: 2}
+  - {fileID: 2100000, guid: 304ea6be4453c4e6fa98aef77ab33274, type: 2}
+  - {fileID: 2100000, guid: 1165c58861ba94d6c9fd1f1618c5d17c, type: 2}
+  - {fileID: 2100000, guid: 2878677d7a8854dd08bfd299b121f70a, type: 2}
+  - {fileID: 2100000, guid: 9ae41262f31464c75a78dff73cf70884, type: 2}
+  - {fileID: 2100000, guid: 2a8c29c84ebcf4965aeae27eb62641e6, type: 2}
+  - {fileID: 2100000, guid: 619993de1c3184a7e8299c1ee93b2a46, type: 2}
+  - {fileID: 2100000, guid: d18465c52d96e4e43a3e3acd85520170, type: 2}
 --- !u!54 &6475758345313637514
 Rigidbody:
   m_ObjectHideFlags: 0

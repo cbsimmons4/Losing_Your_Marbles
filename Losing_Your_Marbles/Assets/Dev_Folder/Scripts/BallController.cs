@@ -19,8 +19,11 @@ public class BallController : MonoBehaviour
     private Transform target;
     private float timer;
 
+    public List<Material> materials;
+
     void Start()
     {
+        this.GetComponent<Renderer>().material = this.materials[Random.Range(0, materials.Count - 1)];
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
