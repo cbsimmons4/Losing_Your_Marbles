@@ -38,15 +38,15 @@ public class BallController : MonoBehaviour
 
     void Update()
     {
+        anim.SetBool("isRolling", false);
         timer += Time.deltaTime;
-
+     
         if (timer >= wanderTimer)
         {
             Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
             anim.SetBool("isRolling", true);
             agent.SetDestination(newPos);
             timer = 0;
-            anim.SetBool("isRolling", false);
         }
     }
 
