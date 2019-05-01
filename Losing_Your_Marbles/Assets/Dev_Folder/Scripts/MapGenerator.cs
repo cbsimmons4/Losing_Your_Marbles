@@ -18,6 +18,13 @@ public class MapGenerator : MonoBehaviour {
 
     public Transform Marble;
 
+    public Transform Enemy;
+
+    public Transform Item;
+
+    [Range(0, 50)]
+    public int enemy_cap;
+
     [Range(1, 50)]
     public int num_marbles;
 
@@ -640,4 +647,64 @@ public class MapGenerator : MonoBehaviour {
         return this.marbles_spawned;
     }
 
+
+    public void setEnemyCap(int cap)
+    {
+        this.enemy_cap = cap;
+    }
+
+    public void setNumMarbles (int num) {
+        this.num_marbles = num;
+    }
+
+    public void setWidth(int width)
+    {
+        this.width = width;
+
+    }
+
+    public void setHeigth(int height) {
+        this.height = height;
+    }
+
+
+    public void SetPassageWidth (int pw)
+    {
+        this.passageWidth = pw;
+    }
+
+    public void setSeed (String seed)
+    {
+        this.seed = seed;
+    }
+
+    public void boolean (bool b)
+    {
+        this.useRandomSeed = b;
+    }
+
+    public void setRandomFillPercent (int num)
+    {
+        this.randomFillPercent = num;
+    }
+
+ 
+    public void SetWallThreshholdSize( int num) {
+        this.wallThresholdSize = num;
+    }
+
+    public void SetRoomThresholdSize (int num)
+    {
+        this.roomThresholdSize = num;
+    }
+
+    public void setForestDensity(int num)
+    {
+        this.forest_density = num;
+    }
+
+    public void SetMapStatus (bool enabled) {
+        this.disableMinimap = !enabled;
+
+     }
 }
