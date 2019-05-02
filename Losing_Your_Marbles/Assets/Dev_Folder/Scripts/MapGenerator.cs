@@ -23,39 +23,39 @@ public class MapGenerator : MonoBehaviour {
     public Transform Item;
 
     [Range(0, 50)]
-    public int enemy_cap;
+    public static int enemy_cap;
 
     [Range(1, 50)]
-    public int num_marbles;
+    public static int num_marbles;
 
     [Range(100, 255)]
-    public int width;
+    public static int width;
 
     [Range(100, 255)]
-    public int height;
+    public static int height;
 
     [Range(5, 10)]
-    public int passageWidth;
+    public static int passageWidth;
 
-	public string seed;
+	public static string seed;
 
-	public bool useRandomSeed;
+	public static bool useRandomSeed;
 
 	[Range(35,55)]
-	public int randomFillPercent;
+	public static int randomFillPercent;
 
 	private int[,] map;
 
     [Range(20, 100)]
-    public int wallThresholdSize;
+    public static int wallThresholdSize;
     
     [Range(20, 100)]
-    public int roomThresholdSize;
+    public static int roomThresholdSize;
 
     [Range(0, 3)]
-    public int forest_density;
+    public static int forest_density;
 
-    public bool disableMinimap;
+    public static bool disableMinimap;
 
     private int center_x;
     private int center_z;
@@ -86,8 +86,8 @@ public class MapGenerator : MonoBehaviour {
             GameObject.Find("Minimap").SetActive(false);
         }
 
-        this.center_x = this.width/2;
-        this.center_z = this.height/2;
+        this.center_x = width/2;
+        this.center_z = height/2;
 		GenerateMap();
 
 	}
@@ -95,7 +95,7 @@ public class MapGenerator : MonoBehaviour {
     private void add_decorations() {
         foreach (KeyValuePair<int, int> space in this.open_spaces)
         {
-            if (Random.Range(1, 50) < this.forest_density + 1)
+            if (Random.Range(1, 50) < forest_density + 1)
             {
                 Vector3 cur_pos = new Vector3((space.Key - this.center_x) * 2, 0, (space.Value - this.center_z) * 2);
                 GameObject obj = this.decorations[Random.Range(0, this.decorations.Count)];
@@ -113,7 +113,7 @@ public class MapGenerator : MonoBehaviour {
 
         foreach (KeyValuePair<int, int> space in  this.open_spaces)
         {
-            if (Random.Range(1,50) < this.forest_density)
+            if (Random.Range(1,50) < forest_density)
             {
                 Vector3 cur_pos = new Vector3((space.Key - this.center_x) * 2, 0, (space.Value - this.center_z) * 2) ;
                 GameObject obj = this.obsticles[Random.Range(0, this.obsticles.Count)];
@@ -135,7 +135,7 @@ public class MapGenerator : MonoBehaviour {
         List<KeyValuePair<int, int>> spaces = new List<KeyValuePair<int, int>>(this.open_spaces);
         this.marbles_spawned = 0;
 
-        for ( int i = 0; i < this.num_marbles; i++) {
+        for ( int i = 0; i < num_marbles; i++) {
             if (spaces.Count > 1) {
                 KeyValuePair<int, int> cur_position = spaces[this.pseudoRandom.Next(0, open_spaces.Count)];
                 spaces.Remove(cur_position);
@@ -253,7 +253,7 @@ public class MapGenerator : MonoBehaviour {
 
     void ProcessMap() {
 		List<List<Coord>> wallRegions = GetRegions (1);
-		int wallThresholdSize = this.wallThresholdSize;
+		
 
 		foreach (List<Coord> wallRegion in wallRegions) {
 			if (wallRegion.Count < wallThresholdSize) {
@@ -264,7 +264,6 @@ public class MapGenerator : MonoBehaviour {
 		}
 
 		List<List<Coord>> roomRegions = GetRegions (0);
-		int roomThresholdSize = this.roomThresholdSize;
 		List<Room> survivingRooms = new List<Room> ();
 		
 		foreach (List<Coord> roomRegion in roomRegions) {
@@ -619,28 +618,28 @@ public class MapGenerator : MonoBehaviour {
 
     public int GetHeight() 
     {
-        return this.height;
+        return height;
     }
 
     public int GetWidth()
     {
-        return this.width;
+        return width;
     }
 
     public int Get_num_Marbles()
     {
-        return this.num_marbles;
+        return num_marbles;
     }
 
 
     public void DisableMiniMap()
     {
-        this.disableMinimap = true;
+        disableMinimap = true;
     }
 
     public void EnableMiniMap()
     {
-        this.disableMinimap = false;
+        disableMinimap = false;
     }
 
     public int Get_Marbles_Spawned() {
@@ -648,63 +647,63 @@ public class MapGenerator : MonoBehaviour {
     }
 
 
-    public void setEnemyCap(int cap)
+    public void SetEnemyCap(int cap)
     {
-        this.enemy_cap = cap;
+        enemy_cap = cap;
     }
 
-    public void setNumMarbles (int num) {
-        this.num_marbles = num;
+    public void SetNumMarbles (int num) {
+        num_marbles = num;
     }
 
-    public void setWidth(int width)
+    public void SetWidth(int w)
     {
-        this.width = width;
+        width = w;
 
     }
 
-    public void setHeigth(int height) {
-        this.height = height;
+    public void SetHeigth(int h) {
+        height = h;
     }
 
 
     public void SetPassageWidth (int pw)
     {
-        this.passageWidth = pw;
+        passageWidth = pw;
     }
 
-    public void setSeed (String seed)
+    public void SetSeed (String s)
     {
-        this.seed = seed;
+        seed = s;
     }
 
-    public void boolean (bool b)
+    public void SetUseRandomSeed(bool b)
     {
-        this.useRandomSeed = b;
+        useRandomSeed = b;
     }
 
-    public void setRandomFillPercent (int num)
+    public void SetRandomFillPercent (int num)
     {
-        this.randomFillPercent = num;
+        randomFillPercent = num;
     }
 
  
     public void SetWallThreshholdSize( int num) {
-        this.wallThresholdSize = num;
+        wallThresholdSize = num;
     }
 
     public void SetRoomThresholdSize (int num)
     {
-        this.roomThresholdSize = num;
+        roomThresholdSize = num;
     }
 
-    public void setForestDensity(int num)
+    public void SetForestDensity(int num)
     {
-        this.forest_density = num;
+        forest_density = num;
     }
 
     public void SetMapStatus (bool enabled) {
-        this.disableMinimap = !enabled;
+        disableMinimap = !enabled;
 
      }
 }
