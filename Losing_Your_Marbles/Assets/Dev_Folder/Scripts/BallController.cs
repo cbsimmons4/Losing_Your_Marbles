@@ -19,6 +19,9 @@ public class BallController : MonoBehaviour
     private Transform target;
     private float timer;
 
+    Vector3 lastPosition;
+    float speed;
+
     public List<Material> materials;
 
     void Start()
@@ -31,23 +34,34 @@ public class BallController : MonoBehaviour
         //open_spaces = mg.Get_OS();
         //map = mg.Get_map();
         agent.enabled = true;
-        agent.updateRotation = true;
-     //   agent.updatePosition = false;
-
+        //agent.updateRotation = false;
+        agent.updateUpAxis = false;
+        lastPosition = transform.position;
     }
 
     void Update()
     {
-        anim.SetBool("isRolling", false);
+       //anim.SetBool("isRolling", false);
         timer += Time.deltaTime;
      
         if (timer >= wanderTimer)
         {
             Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
-            anim.SetBool("isRolling", true);
+            //anim.SetBool("isRolling", true);
             agent.SetDestination(newPos);
             timer = 0;
         }
+    }
+
+    private void FixedUpdate()
+    {
+        //transform.rotation = agent.transform.rotation;
+        //Vector3.Cross(transform.position - lastPosition, transform.up);
+        Vector3 direction = Vector3.Cross(lastPosition - transform.position, Vector3.up);
+        speed = (((transform.position - lastPosition).magnitude) / Time.deltaTime);
+        transform.RotateAround(transform.position, direction, speed);
+        lastPosition = transform.position;
+       
     }
 
 

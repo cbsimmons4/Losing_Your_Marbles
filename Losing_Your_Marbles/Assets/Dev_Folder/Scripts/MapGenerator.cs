@@ -136,7 +136,7 @@ public class MapGenerator : MonoBehaviour {
         this.marbles_spawned = 0;
 
         for ( int i = 0; i < this.num_marbles; i++) {
-            if (spaces.Count > 0) {
+            if (spaces.Count > 1) {
                 KeyValuePair<int, int> cur_position = spaces[this.pseudoRandom.Next(0, open_spaces.Count)];
                 spaces.Remove(cur_position);
                 float x = cur_position.Key;
