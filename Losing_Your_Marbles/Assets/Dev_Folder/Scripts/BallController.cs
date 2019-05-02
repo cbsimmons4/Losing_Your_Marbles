@@ -10,7 +10,7 @@ public class BallController : MonoBehaviour
     //int[,] map;
     NavMeshAgent agent;
     Rigidbody rb;
-    Animator anim;
+    //Animator anim;
     //MapGenerator mg;
 
     public float wanderRadius;
@@ -29,7 +29,7 @@ public class BallController : MonoBehaviour
         this.GetComponent<Renderer>().material = this.materials[Random.Range(0, materials.Count - 1)];
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
         //mg = GameObject.Find("Map Generator").GetComponent<MapGenerator>();
         //open_spaces = mg.Get_OS();
         //map = mg.Get_map();
