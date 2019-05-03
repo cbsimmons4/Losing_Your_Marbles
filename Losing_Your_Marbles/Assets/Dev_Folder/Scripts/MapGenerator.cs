@@ -26,10 +26,10 @@ public class MapGenerator : MonoBehaviour {
     public static int enemy_cap;
 
     [Range(1, 50)]
-    public static int num_marbles;
+    public static  int num_marbles;
 
     [Range(100, 255)]
-    public static int width;
+    public static  int width;
 
     [Range(100, 255)]
     public static int height;
@@ -42,12 +42,12 @@ public class MapGenerator : MonoBehaviour {
 	public static bool useRandomSeed;
 
 	[Range(35,55)]
-	public static int randomFillPercent;
+	public static int  randomFillPercent;
 
 	private int[,] map;
 
     [Range(20, 100)]
-    public static int wallThresholdSize;
+    public  static int wallThresholdSize;
     
     [Range(20, 100)]
     public static int roomThresholdSize;
@@ -69,10 +69,13 @@ public class MapGenerator : MonoBehaviour {
     public List<GameObject> obsticles;
 
     public List<GameObject> decorations;
-
+    
     void Awake() {
 
-        if (useRandomSeed)
+
+       // Debug.Log(width);
+
+        if (useRandomSeed || seed == null)
         {
             pseudoRandom = new System.Random();
         }
@@ -91,6 +94,8 @@ public class MapGenerator : MonoBehaviour {
 		GenerateMap();
 
 	}
+
+
 
     private void add_decorations() {
         foreach (KeyValuePair<int, int> space in this.open_spaces)

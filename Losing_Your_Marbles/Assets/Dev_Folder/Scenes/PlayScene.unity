@@ -967,16 +967,16 @@ MonoBehaviour:
   Enemy: {fileID: 0}
   Item: {fileID: 0}
   enemy_cap: 0
-  num_marbles: 15
-  width: 100
-  height: 100
-  passageWidth: 6
-  seed: 100
-  useRandomSeed: 1
-  randomFillPercent: 48
-  wallThresholdSize: 50
-  roomThresholdSize: 50
-  forest_density: 2
+  num_marbles: 0
+  width: 0
+  height: 0
+  passageWidth: 0
+  seed: 
+  useRandomSeed: 0
+  randomFillPercent: 0
+  wallThresholdSize: 0
+  roomThresholdSize: 0
+  forest_density: 0
   disableMinimap: 0
   obsticles:
   - {fileID: 100000, guid: 6aab193b7693b5e4c9741f1917d2987c, type: 3}
