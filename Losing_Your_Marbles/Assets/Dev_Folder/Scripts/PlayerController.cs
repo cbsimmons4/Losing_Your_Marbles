@@ -10,13 +10,23 @@ public class PlayerController : MonoBehaviour
     public GameObject ClosedCH;
     public Text marbleCount;
 
+    private void Awake()
+    {
+        marbleCount = GameObject.Find("Marble Count").GetComponent<Text>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         FreezeGun.transform.position = FreezeGun.transform.parent.position + FreezeGun.transform.parent.right + (1.3f * FreezeGun.transform.parent.forward) + (-0.6f * FreezeGun.transform.parent.up);
         this.OpenCH.SetActive(true);
         this.ClosedCH.SetActive(false);
-        marbleCount = GameObject.Find("Marble Count").GetComponent<Text>();
+       // marbleCount = GameObject.Find("Marble Count").GetComponent<Text>();
+    }
+
+    public void incrementMarbleCount()
+    {
+        marbleCount.text = (int.Parse(marbleCount.text) + 1).ToString();
     }
 
     // Update is called once per frame
@@ -49,11 +59,10 @@ public class PlayerController : MonoBehaviour
                 if (m.CompareTag("marble"))
                 {
                     DestroyImmediate(m.gameObject);
-                    marbleCount.text = (int.Parse(marbleCount.text) + 1).ToString();
+                    marbleCount.text = (int.Parse(marbleCount.text) - 1).ToString();
                 }
                    
             }
         }
-
     }
 }

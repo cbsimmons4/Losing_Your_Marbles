@@ -3520,7 +3520,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b6889b63672e46da80e81dbf80c2927, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MysteryBox: {fileID: 100000, guid: d29ba28bd5caaed429838de8bac7be72, type: 3}
+  MysteryBox: {fileID: 6293241895498605386, guid: f43015d925d007240a0d97a9602488ec,
+    type: 3}
 --- !u!1 &1696492128 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100006, guid: c6453f8e1f814744d8b94e5a6d1f9942,

@@ -15,17 +15,19 @@ public class BallController : MonoBehaviour
 
     public float wanderRadius;
     public float wanderTimer;
-    //public GameObject player;
+    private PlayerController playerCon;
     private Transform target;
     private float timer;
-
+   
     Vector3 lastPosition;
     float speed;
 
     public List<Material> materials;
 
+
     void Start()
     {
+        //GameObject.Find("Player").GetComponent<PlayerController>().incrementMarbleCount();
         this.GetComponent<Renderer>().material = this.materials[Random.Range(0, materials.Count)];
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
@@ -37,6 +39,11 @@ public class BallController : MonoBehaviour
         //agent.updateRotation = false;
         agent.updateUpAxis = false;
         lastPosition = transform.position;
+        if (GameObject.Find("Player") != null)
+        {
+
+            GameObject.Find("Player").GetComponent<PlayerController>().incrementMarbleCount();
+        }
     }
 
     void Update()
