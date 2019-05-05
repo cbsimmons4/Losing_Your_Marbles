@@ -26,7 +26,7 @@ public class BallController : MonoBehaviour
 
     void Start()
     {
-        this.GetComponent<Renderer>().material = this.materials[Random.Range(0, materials.Count - 1)];
+        this.GetComponent<Renderer>().material = this.materials[Random.Range(0, materials.Count)];
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         //anim = GetComponent<Animator>();
@@ -41,13 +41,11 @@ public class BallController : MonoBehaviour
 
     void Update()
     {
-       //anim.SetBool("isRolling", false);
         timer += Time.deltaTime;
      
         if (timer >= wanderTimer)
         {
             Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
-            //anim.SetBool("isRolling", true);
             agent.SetDestination(newPos);
             timer = 0;
         }
@@ -55,8 +53,6 @@ public class BallController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //transform.rotation = agent.transform.rotation;
-        //Vector3.Cross(transform.position - lastPosition, transform.up);
         Vector3 direction = Vector3.Cross(lastPosition - transform.position, Vector3.up);
         speed = (((transform.position - lastPosition).magnitude) / Time.deltaTime);
         transform.RotateAround(transform.position, direction, speed);

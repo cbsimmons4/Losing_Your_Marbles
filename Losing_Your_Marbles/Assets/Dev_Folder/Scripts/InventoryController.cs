@@ -20,6 +20,7 @@ public class InventoryController : MonoBehaviour
     {
         
     }
+
     public void AddTrap()
     {
         int trapCt = int.Parse(trapCount.text);

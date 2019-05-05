@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.G))
         {
-            Collider[] marbles = Physics.OverlapSphere(FreezeGun.transform.position, 10);
+            Collider[] marbles = Physics.OverlapSphere(FreezeGun.transform.position, 2);
             foreach(Collider m in marbles)
             {
                 if (m.CompareTag("marble"))

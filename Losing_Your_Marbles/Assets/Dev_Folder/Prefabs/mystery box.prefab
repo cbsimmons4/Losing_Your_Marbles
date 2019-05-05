@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1379837969496897732}
   - component: {fileID: 8155884728341265019}
   - component: {fileID: 7721161215061651595}
+  - component: {fileID: 216409814795613285}
   m_Layer: 0
   m_Name: mystery box
   m_TagString: Untagged
@@ -104,3 +105,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9906fd71ca3c424ca866a1a0f071b56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &216409814795613285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6293241895498605386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b6889b63672e46da80e81dbf80c2927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MysteryBox: {fileID: 0}
