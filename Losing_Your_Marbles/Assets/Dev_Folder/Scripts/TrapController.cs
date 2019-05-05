@@ -22,9 +22,8 @@ public class TrapController : MonoBehaviour
     {
         if (other.CompareTag("marble"))
         {
-            Destroy(other.gameObject);
-            marbleCount.text = (int.Parse(marbleCount.text) + 1).ToString();
-            Destroy(this.gameObject);
+            other.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+            
         }
     }
 }
