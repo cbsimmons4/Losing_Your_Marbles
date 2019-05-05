@@ -303,6 +303,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1746922830}
+  - {fileID: 1325796425}
   - {fileID: 319258752}
   - {fileID: 1021418955}
   - {fileID: 723335840}
@@ -401,7 +402,7 @@ GameObject:
   - component: {fileID: 182818320}
   - component: {fileID: 182818319}
   m_Layer: 5
-  m_Name: Text (5)
+  m_Name: Health Potion Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -587,6 +588,10 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 13600000, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7643728322225168851, guid: c6453f8e1f814744d8b94e5a6d1f9942,
         type: 3}
       propertyPath: m_Carve
@@ -671,6 +676,7 @@ GameObject:
   - component: {fileID: 219321855}
   - component: {fileID: 219321857}
   - component: {fileID: 219321856}
+  - component: {fileID: 219321858}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -703,12 +709,12 @@ RectTransform:
   - {fileID: 1783480631}
   - {fileID: 1479965020}
   m_Father: {fileID: 93556445}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.09900001, y: 0.05076813}
   m_AnchorMax: {x: 0.87865317, y: 0.30459422}
-  m_AnchoredPosition: {x: -218.3, y: -17.08}
-  m_SizeDelta: {x: -295.37, y: -5.27}
+  m_AnchoredPosition: {x: -217.70001, y: -7.709961}
+  m_SizeDelta: {x: -295.37, y: 4.11}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &219321856
 MonoBehaviour:
@@ -747,6 +753,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 219321854}
   m_CullTransparentMesh: 0
+--- !u!114 &219321858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219321854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aabc86212e9159f4aa50f02fcaf32e2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1696492128}
+  trap: {fileID: 5146075619269249358, guid: 6f803c17238b6494eb2cdd4e6fcda801, type: 3}
+  trapCount: {fileID: 1882423244}
 --- !u!1 &223723095
 GameObject:
   m_ObjectHideFlags: 0
@@ -951,7 +972,7 @@ GameObject:
   - component: {fileID: 274975693}
   - component: {fileID: 274975692}
   m_Layer: 5
-  m_Name: Text (2)
+  m_Name: Invisibility Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1030,7 +1051,7 @@ GameObject:
   - component: {fileID: 319258754}
   - component: {fileID: 319258753}
   m_Layer: 5
-  m_Name: Count
+  m_Name: Marbles Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1044,16 +1065,16 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319258751}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -2.1}
+  m_LocalScale: {x: 0.12679625, y: 0.1963829, z: 1}
   m_Children: []
   m_Father: {fileID: 93556445}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 10, y: -10}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 13.700012, y: -6.5}
+  m_SizeDelta: {x: 109.08, y: 53}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &319258753
 MonoBehaviour:
@@ -1077,18 +1098,18 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 100
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_MinSize: 1
+    m_MaxSize: 100
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 'Marbles Collected:'
 --- !u!222 &319258754
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1462,7 +1483,7 @@ GameObject:
   - component: {fileID: 566763010}
   - component: {fileID: 566763009}
   m_Layer: 5
-  m_Name: Text (13)
+  m_Name: Invisibility Count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1693,7 +1714,7 @@ GameObject:
   - component: {fileID: 662990776}
   - component: {fileID: 662990775}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Ammo Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1875,7 +1896,7 @@ Transform:
   - {fileID: 145702716}
   - {fileID: 1592635048}
   m_Father: {fileID: 93556445}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &736102040
 GameObject:
@@ -1889,7 +1910,7 @@ GameObject:
   - component: {fileID: 736102043}
   - component: {fileID: 736102042}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: Traps Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2206,7 +2227,7 @@ GameObject:
   - component: {fileID: 850230620}
   - component: {fileID: 850230619}
   m_Layer: 5
-  m_Name: Text (3)
+  m_Name: Speed Boost Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2312,7 +2333,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.011899894, y: 0.109000005}
   m_AnchorMax: {x: 0.1446333, y: 0.89100003}
-  m_AnchoredPosition: {x: -25.4, y: 22.7}
+  m_AnchoredPosition: {x: -25.400024, y: 22.7}
   m_SizeDelta: {x: -44, y: -43}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &867735850
@@ -2428,7 +2449,7 @@ GameObject:
   - component: {fileID: 961728522}
   - component: {fileID: 961728521}
   m_Layer: 5
-  m_Name: Text (14)
+  m_Name: Speed Boost Count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2527,7 +2548,7 @@ Transform:
   - {fileID: 1507120086}
   - {fileID: 2014898749}
   m_Father: {fileID: 93556445}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1032515121
 GameObject:
@@ -2903,6 +2924,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1235873191}
   m_CullTransparentMesh: 0
+--- !u!1 &1325796424
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1325796425}
+  - component: {fileID: 1325796427}
+  - component: {fileID: 1325796426}
+  m_Layer: 5
+  m_Name: Marble Count
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1325796425
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325796424}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.40775388, y: 0.38219357, z: 1}
+  m_Children: []
+  m_Father: {fileID: 93556445}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -341, y: 93.8}
+  m_SizeDelta: {x: 60.66, y: 36.63}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1325796426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325796424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 100
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 100
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: 0
+--- !u!222 &1325796427
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325796424}
+  m_CullTransparentMesh: 0
 --- !u!1 &1400472453
 GameObject:
   m_ObjectHideFlags: 0
@@ -3063,7 +3163,7 @@ GameObject:
   - component: {fileID: 1479965022}
   - component: {fileID: 1479965021}
   m_Layer: 5
-  m_Name: Text (16)
+  m_Name: Health Potion Count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3397,6 +3497,7 @@ MonoBehaviour:
   FreezeGun: {fileID: 1639296801}
   OpenCH: {fileID: 1021418954}
   ClosedCH: {fileID: 723335839}
+  marbleCount: {fileID: 0}
 --- !u!1 &1728306336
 GameObject:
   m_ObjectHideFlags: 0
@@ -3409,7 +3510,7 @@ GameObject:
   - component: {fileID: 1728306339}
   - component: {fileID: 1728306338}
   m_Layer: 5
-  m_Name: Text (11)
+  m_Name: Ammo Count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3561,7 +3662,7 @@ GameObject:
   - component: {fileID: 1783480633}
   - component: {fileID: 1783480632}
   m_Layer: 5
-  m_Name: Text (15)
+  m_Name: Freeze Gun Count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3757,7 +3858,7 @@ GameObject:
   - component: {fileID: 1829700312}
   - component: {fileID: 1829700311}
   m_Layer: 5
-  m_Name: Text (4)
+  m_Name: Freeze Gun Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3953,7 +4054,7 @@ GameObject:
   - component: {fileID: 1882423245}
   - component: {fileID: 1882423244}
   m_Layer: 5
-  m_Name: Text (12)
+  m_Name: Traps Count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4011,7 +4112,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 0
-  m_Text: 0
+  m_Text: 1
 --- !u!222 &1882423245
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4288,7 +4389,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2059200310}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 219321858}
+        m_MethodName: AddTrap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2059200310
