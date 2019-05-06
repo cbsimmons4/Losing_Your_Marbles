@@ -713,7 +713,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.09900001, y: 0.05076813}
   m_AnchorMax: {x: 0.87865317, y: 0.30459422}
-  m_AnchoredPosition: {x: -217.7002, y: -7.709961}
+  m_AnchoredPosition: {x: -217.7002, y: -7.709976}
   m_SizeDelta: {x: -295.37, y: 4.11}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &219321856
@@ -1109,7 +1109,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Marbles Collected:'
+  m_Text: 'Marbles Remaining:'
 --- !u!222 &319258754
 CanvasRenderer:
   m_ObjectHideFlags: 0

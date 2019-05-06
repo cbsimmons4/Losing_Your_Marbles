@@ -65,4 +65,46 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+      if(other.CompareTag("mystery box"))
+        {
+
+            int rand = Random.Range(0, 6);
+            incrementItemCount(rand);
+            Destroy(other.gameObject); 
+        }  
+    }
+    
+    void incrementItemCount(int index)
+    {
+        Text count;
+        switch (index)
+        {
+            case 0:
+                count = GameObject.Find("Ammo Count").GetComponent<Text>();
+                count.text = (int.Parse(count.text) + Random.Range(9,25)).ToString();
+                break;
+            case 1:
+                count = GameObject.Find("Traps Count").GetComponent<Text>();
+                break;
+            case 2:
+                count = GameObject.Find("Invisibility Count").GetComponent<Text>();
+                break;
+            case 3:
+                count = GameObject.Find("Speed Boost Count").GetComponent<Text>();
+                break;
+            case 4:
+                count = GameObject.Find("Freeze Gun Count").GetComponent<Text>();
+                break;
+            case 5:
+                count = GameObject.Find("Health Potion Count").GetComponent<Text>();
+                break;
+            default:
+                goto case 0;
+        }
+        count.text = (int.Parse(count.text) + 1).ToString();
+    }
+
 }
