@@ -9,10 +9,12 @@ public class PlayerController : MonoBehaviour
     public GameObject OpenCH;
     public GameObject ClosedCH;
     public Text marbleCount;
+    public Text winText;
 
     private void Awake()
     {
         marbleCount = GameObject.Find("Marble Count").GetComponent<Text>();
+        winText = GameObject.Find("Win Text").GetComponent<Text>();
     }
 
     // Start is called before the first frame update
@@ -60,6 +62,10 @@ public class PlayerController : MonoBehaviour
                 {
                     DestroyImmediate(m.gameObject);
                     marbleCount.text = (int.Parse(marbleCount.text) - 1).ToString();
+                    if(int.Parse(marbleCount.text) == 0)
+                    {
+                        winText.text = "You Win!";
+                    }
                 }
                    
             }
