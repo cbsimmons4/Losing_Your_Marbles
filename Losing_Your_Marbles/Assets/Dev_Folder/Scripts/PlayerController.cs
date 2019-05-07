@@ -10,11 +10,13 @@ public class PlayerController : MonoBehaviour
     public GameObject ClosedCH;
     public Text marbleCount;
     public Text winText;
+    public Text healthRemain;
 
     private void Awake()
     {
         marbleCount = GameObject.Find("Marble Count").GetComponent<Text>();
         winText = GameObject.Find("Win Text").GetComponent<Text>();
+        healthRemain = GameObject.Find("Health Remain").GetComponent<Text>();
     }
 
     // Start is called before the first frame update
@@ -111,6 +113,22 @@ public class PlayerController : MonoBehaviour
                 goto case 0;
         }
         count.text = (int.Parse(count.text) + 1).ToString();
+    }
+
+    void decrementHealth()
+    {
+           //get the current health
+        int curr = int.Parse(healthRemain.text);
+        //decrement the health by one
+        curr--;
+        healthRemain.text = curr.ToString();
+
+        //check if health drops to 0 
+        if(curr == 0)
+        {
+            winText.text = "You Lose!";
+            //add some operation, possible back to the main menu
+        }
     }
 
 }
