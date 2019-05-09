@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public Text healthRemain;
     public Transform trap;
     public Transform miniTrap;
+    private bool isVisible;
 
     int selected;
    
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
         healthRemain = GameObject.Find("Health Remain").GetComponent<Text>();
         selected = 1;
         GameObject.Find("Ammo Title").GetComponent<Text>().color = new Color(255, 215, 0);
+        this.isVisible = true;
     }
 
     // Start is called before the first frame update
@@ -165,15 +167,20 @@ public class PlayerController : MonoBehaviour
                     Text invCt = GameObject.Find("Invisibility Count").GetComponent<Text>();
                     if (int.Parse(invCt.text) > 0)
                     {
-                        // turn enemy off
+                        this.isVisible = false;
                         invCt.text = (int.Parse(invCt.text) - 1).ToString();
+                        StartCoroutine("VisibleAfterTime");
+
                     }
                     break;
                 case 4:
                     Text speedCt = GameObject.Find("Speed Boost Count").GetComponent<Text>();
                     if (int.Parse(speedCt.text) > 0)
                     {
-                        //increase speed for period of time
+
+                        UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController c  = GameObject.Find("Player").GetComponent<UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController>();
+                        c.movementSettings.RunMultiplier = 5;
+                        StartCoroutine("SlowAfterTime");
                         speedCt.text = (int.Parse(speedCt.text) - 1).ToString();
                     }
                     break;
@@ -181,7 +188,7 @@ public class PlayerController : MonoBehaviour
                     Text freezeCt = GameObject.Find("Freeze Gun Count").GetComponent<Text>();
                     if (int.Parse(freezeCt.text) > 0)
                     {
-                        //increase speed for period of time
+                        // Freeze enemy for period on time.
                         freezeCt.text = (int.Parse(freezeCt.text) - 1).ToString();
                     }
                     break;
@@ -257,4 +264,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    IEnumerator SlowAfterTime()
+    {
+        yield return new WaitForSeconds(10);
+        UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController c = GameObject.Find("Player").GetComponent<UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController>();
+        c.movementSettings.RunMultiplier = 2;
+    }
+
+    IEnumerator VisibleAfterTime()
+    {
+        yield return new WaitForSeconds(30);
+        this.isVisible = true;
+    }
+
+    public void setVisibility(bool v) {
+        this.isVisible = v;
+    }
+
+    public bool Visible() {
+        return this.isVisible;
+     }
 }

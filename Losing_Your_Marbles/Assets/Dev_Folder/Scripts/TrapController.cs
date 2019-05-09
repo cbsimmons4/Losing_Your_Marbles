@@ -12,12 +12,6 @@ public class TrapController : MonoBehaviour
         marbleCount=GameObject.Find("Marble Count").GetComponent<Text>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("marble"))

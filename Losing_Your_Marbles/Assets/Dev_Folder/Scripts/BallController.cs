@@ -5,14 +5,9 @@ using UnityEngine.AI;
 
 public class BallController : MonoBehaviour
 {
-    //List<KeyValuePair<int, int>> open_spaces;
-    //Vector3 destination;
-    //int[,] map;
     NavMeshAgent agent;
     Rigidbody rb;
-    //Animator anim;
-    //MapGenerator mg;
-
+   
     public float wanderRadius;
     public float wanderTimer;
     private PlayerController playerCon;
@@ -27,16 +22,10 @@ public class BallController : MonoBehaviour
 
     void Start()
     {
-        //GameObject.Find("Player").GetComponent<PlayerController>().incrementMarbleCount();
         this.GetComponent<Renderer>().material = this.materials[Random.Range(0, materials.Count)];
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
-        //anim = GetComponent<Animator>();
-        //mg = GameObject.Find("Map Generator").GetComponent<MapGenerator>();
-        //open_spaces = mg.Get_OS();
-        //map = mg.Get_map();
         agent.enabled = true;
-        //agent.updateRotation = false;
         agent.updateUpAxis = false;
         lastPosition = transform.position;
         if (GameObject.Find("Player") != null)
@@ -50,7 +39,7 @@ public class BallController : MonoBehaviour
     {
         timer += Time.deltaTime;
      
-        if (timer >= wanderTimer)
+        if (agent.enabled && timer >= wanderTimer)
         {
             Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
             agent.SetDestination(newPos);
@@ -67,7 +56,6 @@ public class BallController : MonoBehaviour
        
     }
 
-
     public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask) {
         Vector3 randDirection = Random.insideUnitSphere * dist;
  
@@ -79,5 +67,4 @@ public class BallController : MonoBehaviour
  
         return navHit.position;
     }
-
 }

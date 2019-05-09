@@ -24,6 +24,7 @@ public class Enemy_script : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
         playPos = GameObject.Find("Player").GetComponent<Transform>();
         player = GameObject.Find("Player").GetComponent<PlayerController>();
+       
         moved = false;
         attacked = false;
     }
@@ -31,7 +32,9 @@ public class Enemy_script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         float distFromPlayer = Vector3.Distance(transform.position, playPos.position);
+        if (!player.Visible()) distFromPlayer = int.MaxValue;
         if (attackMinDist < distFromPlayer && distFromPlayer < attackMaxDist) 
         {
             nav.isStopped = false;
@@ -45,13 +48,12 @@ public class Enemy_script : MonoBehaviour
             enemAnim.SetBool("isWalking", false);
         }
 
-        if(!attacked && (Vector3.Distance(transform.position, playPos.position) <= attackMinDist))
+        if(player.Visible() && !attacked && (Vector3.Distance(transform.position, playPos.position) <= attackMinDist))
         {
             moved = false;
             attacked = true;
             StartCoroutine(attack());
             StartCoroutine(attackWait());
-
         }
     }
 
@@ -63,7 +65,6 @@ public class Enemy_script : MonoBehaviour
         {
             player.decrementHealth();
         }
-
     }
 
     IEnumerator attackWait()

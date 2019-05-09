@@ -166,7 +166,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-
         public void ToSettings() {
         this.MainMenu.SetActive(false);
         this.SettingsMenu.SetActive(true);
@@ -229,7 +228,6 @@ public class GameManager : MonoBehaviour
         randomFillPercent = num;
     }
 
-
     public void SetWallThreshholdSize(int num)
     {
         wallThresholdSize = num;
@@ -250,6 +248,5 @@ public class GameManager : MonoBehaviour
         disableMinimap = enabled;
 
     }
-
 
 }
