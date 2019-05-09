@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public Text winText;
     public Text healthRemain;
     public Transform trap;
+    public Transform miniTrap;
 
     int selected;
    
@@ -156,6 +157,7 @@ public class PlayerController : MonoBehaviour
                     if (int.Parse(trapCt.text) > 0)
                     {
                         Instantiate(this.trap, this.transform.position - new Vector3(0, 0.25f, 0), Quaternion.identity);
+                        Instantiate(this.miniTrap, GameObject.Find("MiniMapPlayer").GetComponent<Transform>().position, GameObject.Find("MiniMapPlayer").GetComponent<Transform>().rotation);
                         trapCt.text = (int.Parse(trapCt.text) - 1).ToString();
                     }
                     break;

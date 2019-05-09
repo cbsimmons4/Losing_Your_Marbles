@@ -2273,7 +2273,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '3
+  m_Text: '5
 
 '
 --- !u!222 &679084813
@@ -3757,7 +3757,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 0
-  m_Text: 1
+  m_Text: 0
 --- !u!222 &1479965022
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4156,6 +4156,8 @@ MonoBehaviour:
   winText: {fileID: 0}
   healthRemain: {fileID: 0}
   trap: {fileID: 5146075619269249358, guid: 6f803c17238b6494eb2cdd4e6fcda801, type: 3}
+  miniTrap: {fileID: 5707514536262863408, guid: 3e745da26a178ff4483ed3a84d349145,
+    type: 3}
 --- !u!1 &1728306336
 GameObject:
   m_ObjectHideFlags: 0
