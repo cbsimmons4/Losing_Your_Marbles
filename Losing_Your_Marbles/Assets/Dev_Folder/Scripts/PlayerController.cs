@@ -238,13 +238,16 @@ public class PlayerController : MonoBehaviour
         count.text = (int.Parse(count.text) + 1).ToString();
     }
 
-    void decrementHealth()
+    public void decrementHealth()
     {
            //get the current health
         int curr = int.Parse(healthRemain.text);
         //decrement the health by one
-        curr--;
-        healthRemain.text = curr.ToString();
+        if (curr != 0)
+        {
+            curr--;
+            healthRemain.text = curr.ToString();
+        }
 
         //check if health drops to 0 
         if(curr == 0)
