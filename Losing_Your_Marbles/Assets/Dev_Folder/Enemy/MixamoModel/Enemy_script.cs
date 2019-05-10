@@ -9,12 +9,14 @@ public class Enemy_script : MonoBehaviour
     Rigidbody rb;
     NavMeshAgent nav;
     Transform playPos;
-    public float attackMinDist;
-    public float attackMaxDist;
+    public float followMinDist;
+    public float followMaxDist;
+    public float attackDist;
     public float attackTime;
     PlayerController player;
     private bool moved;
     private bool attacked;
+    private Vector3 avoidBuffer;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +26,7 @@ public class Enemy_script : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
         playPos = GameObject.Find("Player").GetComponent<Transform>();
         player = GameObject.Find("Player").GetComponent<PlayerController>();
-       
+        avoidBuffer = new Vector3(Random.Range(-1.2f, 1.2f), 0, Random.Range(-1.2f, 1.2f));
         moved = false;
         attacked = false;
     }
@@ -35,10 +37,10 @@ public class Enemy_script : MonoBehaviour
 
         float distFromPlayer = Vector3.Distance(transform.position, playPos.position);
         if (!player.Visible()) distFromPlayer = int.MaxValue;
-        if (attackMinDist < distFromPlayer && distFromPlayer < attackMaxDist) 
+        if (followMinDist < distFromPlayer && distFromPlayer < followMaxDist) 
         {
             nav.isStopped = false;
-            nav.SetDestination(playPos.position);
+            nav.SetDestination(playPos.position+avoidBuffer);
             enemAnim.SetBool("isWalking", true);
             moved = true;
         } 
@@ -48,7 +50,7 @@ public class Enemy_script : MonoBehaviour
             enemAnim.SetBool("isWalking", false);
         }
 
-        if(player.Visible() && !attacked && (Vector3.Distance(transform.position, playPos.position) <= attackMinDist))
+        if(player.Visible() && !attacked && (Vector3.Distance(transform.position, playPos.position) <= attackDist))
         {
             moved = false;
             attacked = true;
