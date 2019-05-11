@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public Text marbleCount;
     public Text winText;
     public Text healthRemain;
+    public Slider remainingHealthSlider;
     public Transform trap;
     public Transform miniTrap;
     private bool isVisible;
@@ -197,6 +198,7 @@ public class PlayerController : MonoBehaviour
                     if (int.Parse(hpCt.text) > 0)
                     {
                         healthRemain.text = 5.ToString();
+                        remainingHealthSlider.value = 5;
                         hpCt.text = (int.Parse(hpCt.text) - 1).ToString();
                     }
                     break;
@@ -247,13 +249,14 @@ public class PlayerController : MonoBehaviour
 
     public void decrementHealth()
     {
-           //get the current health
+        //get the current health
         int curr = int.Parse(healthRemain.text);
         //decrement the health by one
         if (curr != 0)
         {
             curr--;
             healthRemain.text = curr.ToString();
+            remainingHealthSlider.value = remainingHealthSlider.value - 1;
         }
 
         //check if health drops to 0 

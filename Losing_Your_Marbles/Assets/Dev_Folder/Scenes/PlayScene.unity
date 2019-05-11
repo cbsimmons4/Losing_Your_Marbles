@@ -496,8 +496,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -4.5, y: 0}
-  m_SizeDelta: {x: -9, y: 0}
+  m_AnchoredPosition: {x: -5, y: 0}
+  m_SizeDelta: {x: -10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &95663525
 MonoBehaviour:
@@ -4432,6 +4432,7 @@ MonoBehaviour:
   marbleCount: {fileID: 0}
   winText: {fileID: 0}
   healthRemain: {fileID: 0}
+  remainingHealthSlider: {fileID: 412383125}
   trap: {fileID: 5146075619269249358, guid: 6f803c17238b6494eb2cdd4e6fcda801, type: 3}
   miniTrap: {fileID: 5707514536262863408, guid: 3e745da26a178ff4483ed3a84d349145,
     type: 3}
