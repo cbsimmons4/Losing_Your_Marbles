@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public GameObject ClosedCH;
     public Text marbleCount;
     public Text winText;
+    public Text itemUsage;
     public Text healthRemain;
     public Slider remainingHealthSlider;
     public Transform trap;
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     {
         marbleCount = GameObject.Find("Marble Count").GetComponent<Text>();
         winText = GameObject.Find("Win Text").GetComponent<Text>();
+        itemUsage = GameObject.Find("Item Usage").GetComponent<Text>();
         healthRemain = GameObject.Find("Health Remain").GetComponent<Text>();
         selected = 1;
         GameObject.Find("Ammo Title").GetComponent<Text>().color = new Color(255, 215, 0);
@@ -162,7 +164,9 @@ public class PlayerController : MonoBehaviour
                     {
                         this.isVisible = false;
                         invCt.text = (int.Parse(invCt.text) - 1).ToString();
+                        itemUsage.text = "Invisibility On";
                         StartCoroutine("VisibleAfterTime");
+                        
 
                     }
                     break;
@@ -173,8 +177,10 @@ public class PlayerController : MonoBehaviour
 
                         UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController c  = GameObject.Find("Player").GetComponent<UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController>();
                         c.movementSettings.RunMultiplier = 5;
-                        StartCoroutine("SlowAfterTime");
                         speedCt.text = (int.Parse(speedCt.text) - 1).ToString();
+                        itemUsage.text = "Speed Boost On";
+                        StartCoroutine("SlowAfterTime");
+                        
                     }
                     break;
                 case 6:
@@ -256,12 +262,14 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(10);
         UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController c = GameObject.Find("Player").GetComponent<UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController>();
         c.movementSettings.RunMultiplier = 2;
+        itemUsage.text = "";
     }
 
     IEnumerator VisibleAfterTime()
     {
         yield return new WaitForSeconds(30);
         this.isVisible = true;
+        itemUsage.text = "";
     }
 
     public void setVisibility(bool v) {
