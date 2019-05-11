@@ -13,10 +13,12 @@ public class Enemy_script : MonoBehaviour
     public float followMaxDist;
     public float attackDist;
     public float attackTime;
+    public float freezeTime;
     PlayerController player;
     private bool moved;
     private bool attacked;
     private Vector3 avoidBuffer;
+    private bool dead;
 
     // Start is called before the first frame update
     void Start()
@@ -29,33 +31,36 @@ public class Enemy_script : MonoBehaviour
         avoidBuffer = new Vector3(Random.Range(-1.2f, 1.2f), 0, Random.Range(-1.2f, 1.2f));
         moved = false;
         attacked = false;
+        dead = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!dead)
+        {
+            float distFromPlayer = Vector3.Distance(transform.position, playPos.position);
+            if (!player.Visible()) distFromPlayer = int.MaxValue;
+            if (followMinDist < distFromPlayer && distFromPlayer < followMaxDist)
+            {
+                nav.isStopped = false;
+                nav.SetDestination(playPos.position + avoidBuffer);
+                enemAnim.SetBool("isWalking", true);
+                moved = true;
+            }
+            else
+            {
+                nav.isStopped = true;
+                enemAnim.SetBool("isWalking", false);
+            }
 
-        float distFromPlayer = Vector3.Distance(transform.position, playPos.position);
-        if (!player.Visible()) distFromPlayer = int.MaxValue;
-        if (followMinDist < distFromPlayer && distFromPlayer < followMaxDist) 
-        {
-            nav.isStopped = false;
-            nav.SetDestination(playPos.position+avoidBuffer);
-            enemAnim.SetBool("isWalking", true);
-            moved = true;
-        } 
-        else 
-        {
-            nav.isStopped = true;
-            enemAnim.SetBool("isWalking", false);
-        }
-
-        if(player.Visible() && !attacked && (Vector3.Distance(transform.position, playPos.position) <= attackDist))
-        {
-            moved = false;
-            attacked = true;
-            StartCoroutine(attack());
-            StartCoroutine(attackWait());
+            if (player.Visible() && !attacked && (Vector3.Distance(transform.position, playPos.position) <= attackDist))
+            {
+                moved = false;
+                attacked = true;
+                StartCoroutine(attack());
+                StartCoroutine(attackWait());
+            }
         }
     }
 
@@ -73,5 +78,27 @@ public class Enemy_script : MonoBehaviour
     { 
         yield return new WaitForSeconds(2.3f);
         attacked = false;
+    }
+
+    public void death()
+    {
+        dead = true;
+        enemAnim.SetTrigger("Dead");
+        Destroy(gameObject, 5);
+    }
+
+    public void freeze()
+    {
+        nav.enabled = false;
+        dead = true;
+        enemAnim.SetBool("isWalking", false);
+        StartCoroutine(freezeTimer());
+    }
+
+    IEnumerator freezeTimer()
+    {
+        yield return new WaitForSeconds(freezeTime);
+        nav.enabled = true;
+        dead = false;
     }
 }

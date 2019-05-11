@@ -189,7 +189,7 @@ public class PlayerController : MonoBehaviour
                     if (int.Parse(freezeCt.text) > 0)
                     {
                         // Freeze enemy for period on time.
-                        freezeCt.text = (int.Parse(freezeCt.text) - 1).ToString();
+                        //freezeCt.text = (int.Parse(freezeCt.text) - 1).ToString();
                     }
                     break;
                 case 6:
@@ -284,4 +284,70 @@ public class PlayerController : MonoBehaviour
     public bool Visible() {
         return this.isVisible;
      }
+
+    //Returns 0 for no gun, 1 for normal, 2 for freeze
+    public int gunChoice()
+    {
+        if(selected == 1)
+        {
+            return 1;
+        } 
+        else if (selected == 5)
+        {
+            return 2;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    public bool hasAmmo()
+    {
+        bool result;
+        if (selected == 1)
+        {
+            Text ammoCt = GameObject.Find("Ammo Count").GetComponent<Text>();
+            if (int.Parse(ammoCt.text) > 0)
+            {
+                result = true;
+            }
+            else
+            {
+                result = false;
+            }
+        }
+        else if (selected == 5)
+        {
+            Text freezeCt = GameObject.Find("Freeze Gun Count").GetComponent<Text>();
+            if (int.Parse(freezeCt.text) > 0)
+            {
+                result = true;
+            }
+            else
+            {
+                result = false;
+            }
+        }
+        else
+        {
+            result = false;
+        }
+
+        return result;
+    }
+
+    public void shot()
+    {
+        if (selected == 1)
+        {
+            Text ammoCt = GameObject.Find("Ammo Count").GetComponent<Text>();
+            ammoCt.text = (int.Parse(ammoCt.text) - 1).ToString();
+        }
+        else if (selected == 5)
+        {
+            Text freezeCt = GameObject.Find("Freeze Gun Count").GetComponent<Text>();
+            freezeCt.text = (int.Parse(freezeCt.text) - 1).ToString();
+        }
+    }
 }
