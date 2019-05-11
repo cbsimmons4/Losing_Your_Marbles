@@ -143,18 +143,10 @@ public class PlayerController : MonoBehaviour
             GameObject.Find("Health Potion Title").GetComponent<Text>().color = new Color(255, 215, 0);
         }
         // Left click to use from inventory
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             switch (selected)
             {
-                case 1:
-                    Text ammoCt = GameObject.Find("Traps Count").GetComponent<Text>();
-                    if (int.Parse(ammoCt.text) > 0)
-                    {
-                        // shoot from gun
-                    }
-
-                    break;
                 case 2:
                     Text trapCt = GameObject.Find("Traps Count").GetComponent<Text>();
                     if (int.Parse(trapCt.text) > 0)
@@ -183,14 +175,6 @@ public class PlayerController : MonoBehaviour
                         c.movementSettings.RunMultiplier = 5;
                         StartCoroutine("SlowAfterTime");
                         speedCt.text = (int.Parse(speedCt.text) - 1).ToString();
-                    }
-                    break;
-                case 5:
-                    Text freezeCt = GameObject.Find("Freeze Gun Count").GetComponent<Text>();
-                    if (int.Parse(freezeCt.text) > 0)
-                    {
-                        // Freeze enemy for period on time.
-                        //freezeCt.text = (int.Parse(freezeCt.text) - 1).ToString();
                     }
                     break;
                 case 6:
