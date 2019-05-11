@@ -22,7 +22,7 @@ public class MapGenerator : MonoBehaviour {
 
     public Transform Item;
 
-    [Range(0, 50)]
+    [Range(0, 250)]
     public static int enemy_cap;
 
     [Range(1, 50)]

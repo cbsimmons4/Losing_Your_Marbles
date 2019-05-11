@@ -19,15 +19,19 @@ public class Enemy_script : MonoBehaviour
     private bool attacked;
     private Vector3 avoidBuffer;
     private bool dead;
+  
+
 
     // Start is called before the first frame update
     void Start()
     {
+       
         enemAnim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         nav = GetComponent<NavMeshAgent>();
         playPos = GameObject.Find("Player").GetComponent<Transform>();
         player = GameObject.Find("Player").GetComponent<PlayerController>();
+
         avoidBuffer = new Vector3(Random.Range(-1.2f, 1.2f), 0, Random.Range(-1.2f, 1.2f));
         moved = false;
         attacked = false;
@@ -37,31 +41,36 @@ public class Enemy_script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!dead)
-        {
-            float distFromPlayer = Vector3.Distance(transform.position, playPos.position);
-            if (!player.Visible()) distFromPlayer = int.MaxValue;
-            if (followMinDist < distFromPlayer && distFromPlayer < followMaxDist)
-            {
+
+
+          if (!dead)
+          {
+              float distFromPlayer = Vector3.Distance(transform.position, playPos.position);
+              if (!player.Visible()) distFromPlayer = int.MaxValue;
+              if (followMinDist < distFromPlayer && distFromPlayer < followMaxDist)
+              {
+              
                 nav.isStopped = false;
                 nav.SetDestination(playPos.position + avoidBuffer);
                 enemAnim.SetBool("isWalking", true);
                 moved = true;
-            }
-            else
-            {
-                nav.isStopped = true;
-                enemAnim.SetBool("isWalking", false);
-            }
 
-            if (player.Visible() && !attacked && (Vector3.Distance(transform.position, playPos.position) <= attackDist))
-            {
-                moved = false;
-                attacked = true;
-                StartCoroutine(attack());
-                StartCoroutine(attackWait());
-            }
-        }
+              }
+              else
+              {
+                  nav.isStopped = true;
+                  enemAnim.SetBool("isWalking", false);
+              }
+
+              if (player.Visible() && !attacked && (Vector3.Distance(transform.position, playPos.position) <= attackDist))
+              {
+                  moved = false;
+                  attacked = true;
+                  StartCoroutine(attack());
+                  StartCoroutine(attackWait());
+              }
+
+          }
     }
 
     IEnumerator attack()

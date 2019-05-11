@@ -13,7 +13,7 @@ public class BallController : MonoBehaviour
     private PlayerController playerCon;
     private Transform target;
     private float timer;
-   
+    private GameObject player;
     Vector3 lastPosition;
     float speed;
 
@@ -22,6 +22,7 @@ public class BallController : MonoBehaviour
 
     void Start()
     {
+        player = GameObject.Find("Player");
         this.GetComponent<Renderer>().material = this.materials[Random.Range(0, materials.Count)];
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
@@ -45,6 +46,7 @@ public class BallController : MonoBehaviour
             agent.SetDestination(newPos);
             timer = 0;
         }
+
     }
 
     private void FixedUpdate()

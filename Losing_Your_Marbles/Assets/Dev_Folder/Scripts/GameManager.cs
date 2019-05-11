@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 
-    [Range(0, 75)]
+    [Range(0, 250)]
     public int enemy_cap;
 
     [Range(1, 50)]
@@ -48,8 +48,8 @@ public class GameManager : MonoBehaviour
         heightSlider.value = 155;
         this.num_marbles = 15;
         marbleCountSlider.value = 15;
-        this.enemy_cap = 25;
-        enemyCapSlider.value = 25;
+        this.enemy_cap = 125;
+        enemyCapSlider.value = 125;
         this.passageWidth = 6;
         passageWidthSlider.value = 6;
         this.randomFillPercent = 48;
