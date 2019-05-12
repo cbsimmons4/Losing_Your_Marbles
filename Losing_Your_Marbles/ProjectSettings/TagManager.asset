@@ -8,6 +8,7 @@ TagManager:
   - marble
   - mystery box
   - item
+  - enemy
   layers:
   - Default
   - TransparentFX

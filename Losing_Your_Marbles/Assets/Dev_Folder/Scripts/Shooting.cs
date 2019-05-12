@@ -65,18 +65,28 @@ public class Shooting : MonoBehaviour
 
         if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
         {
-            Enemy_script enemy = shootHit.collider.GetComponent<Enemy_script>();
-
-            if (enemy != null)
+            if (shootHit.collider.CompareTag("enemy"))
             {
-                if (playerChoice.gunChoice() == 1 && playerChoice.hasAmmo())
+                Enemy_script enemy = shootHit.collider.GetComponent<Enemy_script>();
+
+                if (enemy != null)
                 {
-                    enemy.death();
+                    if (playerChoice.gunChoice() == 1 && playerChoice.hasAmmo())
+                    {
+                        enemy.death();
+                    }
+                    else if (playerChoice.gunChoice() == 2 && playerChoice.hasAmmo())
+                    {
+                        enemy.freeze();
+                    }
                 }
-                else if (playerChoice.gunChoice() == 2 && playerChoice.hasAmmo())
+            }
+            if (shootHit.collider.CompareTag("marble")) { 
+                if(playerChoice.gunChoice() == 2 && playerChoice.hasAmmo())
                 {
-                    enemy.freeze();
+                    shootHit.collider.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
                 }
+
             }
         }
         else
