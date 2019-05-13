@@ -30,7 +30,6 @@ public class BallController : MonoBehaviour
         isRunning = false;
         gm = GameObject.Find("Map Generator").GetComponent <MapGenerator>();
         this.open_spaces = gm.Get_OS();
-        player = GameObject.Find("Player");
         this.GetComponent<Renderer>().material = this.materials[Random.Range(0, materials.Count)];
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
@@ -39,6 +38,7 @@ public class BallController : MonoBehaviour
         lastPosition = transform.position;
         if (GameObject.Find("Player") != null)
         {
+            player = GameObject.Find("Player");
             GameObject.Find("Player").GetComponent<PlayerController>().incrementMarbleCount();
         }
     }
