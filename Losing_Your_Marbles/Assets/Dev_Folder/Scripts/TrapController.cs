@@ -19,5 +19,9 @@ public class TrapController : MonoBehaviour
             other.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
             
         }
+        else if (other.CompareTag("enemy"))
+        {
+            other.GetComponent<Enemy_script>().death();
+        }
     }
 }

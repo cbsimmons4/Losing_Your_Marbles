@@ -19,13 +19,16 @@ public class Enemy_script : MonoBehaviour
     private bool attacked;
     private Vector3 avoidBuffer;
     private bool dead;
+    private float nextUpdate;
+    private float updateRate;
+    private Vector3 lastPostion;
   
-
-
     // Start is called before the first frame update
     void Start()
     {
-       
+        updateRate = 1;
+        nextUpdate = Time.time;
+        lastPostion = transform.position;
         enemAnim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         nav = GetComponent<NavMeshAgent>();
@@ -41,20 +44,28 @@ public class Enemy_script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
           if (!dead)
           {
               float distFromPlayer = Vector3.Distance(transform.position, playPos.position);
               if (!player.Visible()) distFromPlayer = int.MaxValue;
               if (followMinDist < distFromPlayer && distFromPlayer < followMaxDist)
               {
-              
-                nav.isStopped = false;
-                nav.SetDestination(playPos.position + avoidBuffer);
-                enemAnim.SetBool("isWalking", true);
-                moved = true;
 
+                if (Time.time >= nextUpdate)
+                {
+                    nextUpdate = Time.time + updateRate;
+                    nav.isStopped = false;
+                    nav.SetDestination(playPos.position + avoidBuffer);
+                    if (Vector3.Distance(this.lastPostion, this.transform.position) < .04f)
+                    {
+                        enemAnim.SetBool("isWalking", false);
+                    }
+                    else {
+                        enemAnim.SetBool("isWalking", true);
+                    }
+                    moved = true;
+                }
+               
               }
               else
               {
@@ -71,6 +82,7 @@ public class Enemy_script : MonoBehaviour
               }
 
           }
+        lastPostion = this.transform.position;
     }
 
     IEnumerator attack()
@@ -93,7 +105,9 @@ public class Enemy_script : MonoBehaviour
     {
         dead = true;
         enemAnim.SetTrigger("Dead");
-        Destroy(gameObject, 5);
+        nav.enabled = false;
+        Destroy(gameObject, 3);
+       
     }
 
     public void freeze()

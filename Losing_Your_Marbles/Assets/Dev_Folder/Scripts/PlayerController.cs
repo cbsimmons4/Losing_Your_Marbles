@@ -15,12 +15,24 @@ public class PlayerController : MonoBehaviour
     public Slider remainingHealthSlider;
     public Transform trap;
     public Transform miniTrap;
+    public AudioSource shootAudio;
+    public AudioSource freezegunAudio;
+    public AudioSource trapAudio;
+    public AudioSource healthAudio;
+    public AudioSource invisAudio;
+    public AudioSource speedAudio;
+    public AudioSource damageAudio;
+    public AudioSource gatherAudio;
+    public AudioSource pickupAudio;
+    public Image damagePanel;
+
     private bool isVisible;
 
     int selected;
    
     private void Awake()
     {
+        damagePanel.enabled = false;
         marbleCount = GameObject.Find("Marble Count").GetComponent<Text>();
         winText = GameObject.Find("Win Text").GetComponent<Text>();
         itemUsage = GameObject.Find("Item Usage").GetComponent<Text>();
@@ -75,6 +87,7 @@ public class PlayerController : MonoBehaviour
                 {
                     DestroyImmediate(m.gameObject);
                     marbleCount.text = (int.Parse(marbleCount.text) - 1).ToString();
+                    StartCoroutine(StartAudio(gatherAudio));
                     if(int.Parse(marbleCount.text) == 0)
                     {
                         winText.text = "You Win!";
@@ -156,6 +169,7 @@ public class PlayerController : MonoBehaviour
                         Instantiate(this.trap, this.transform.position - new Vector3(0, 0.25f, 0), Quaternion.identity);
                         Instantiate(this.miniTrap, GameObject.Find("MiniMapPlayer").GetComponent<Transform>().position, GameObject.Find("MiniMapPlayer").GetComponent<Transform>().rotation);
                         trapCt.text = (int.Parse(trapCt.text) - 1).ToString();
+                        StartCoroutine(StartAudio(trapAudio));
                     }
                     break;
                 case 3:
@@ -166,8 +180,7 @@ public class PlayerController : MonoBehaviour
                         invCt.text = (int.Parse(invCt.text) - 1).ToString();
                         itemUsage.text = "Invisibility On";
                         StartCoroutine("VisibleAfterTime");
-                        
-
+                        StartCoroutine(StartAudio(invisAudio));
                     }
                     break;
                 case 4:
@@ -180,7 +193,8 @@ public class PlayerController : MonoBehaviour
                         speedCt.text = (int.Parse(speedCt.text) - 1).ToString();
                         itemUsage.text = "Speed Boost On";
                         StartCoroutine("SlowAfterTime");
-                        
+                        StartCoroutine(StartAudio(speedAudio));
+
                     }
                     break;
                 case 6:
@@ -190,6 +204,7 @@ public class PlayerController : MonoBehaviour
                         healthRemain.text = 5.ToString();
                         remainingHealthSlider.value = 5;
                         hpCt.text = (int.Parse(hpCt.text) - 1).ToString();
+                        StartCoroutine(StartAudio(healthAudio));
                     }
                     break;
             }
@@ -203,6 +218,7 @@ public class PlayerController : MonoBehaviour
 
             int rand = Random.Range(0, 6);
             incrementItemCount(rand);
+            StopCoroutine(StartAudio(pickupAudio));
             Destroy(other.gameObject); 
         }  
     }
@@ -214,7 +230,7 @@ public class PlayerController : MonoBehaviour
         {
             case 0:
                 count = GameObject.Find("Ammo Count").GetComponent<Text>();
-                count.text = (int.Parse(count.text) + Random.Range(9,25)).ToString();
+                count.text = (int.Parse(count.text) + Random.Range(15,35)).ToString();
                 break;
             case 1:
                 count = GameObject.Find("Traps Count").GetComponent<Text>();
@@ -227,6 +243,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case 4:
                 count = GameObject.Find("Freeze Gun Count").GetComponent<Text>();
+                count.text = (int.Parse(count.text) + Random.Range(15, 35)).ToString();
                 break;
             case 5:
                 count = GameObject.Find("Health Potion Count").GetComponent<Text>();
@@ -247,6 +264,10 @@ public class PlayerController : MonoBehaviour
             curr--;
             healthRemain.text = curr.ToString();
             remainingHealthSlider.value = remainingHealthSlider.value - 1;
+            StartCoroutine(StartAudio(damageAudio));
+            damagePanel.enabled = true;
+            StartCoroutine(DamagePanelController());
+
         }
 
         //check if health drops to 0 
@@ -255,6 +276,13 @@ public class PlayerController : MonoBehaviour
             winText.text = "You Lose!";
             //add some operation, possible back to the main menu
         }
+    }
+
+    IEnumerator DamagePanelController()
+    {
+        yield return new WaitForSeconds(1);
+        damagePanel.enabled = false;
+
     }
 
     IEnumerator SlowAfterTime()
@@ -338,11 +366,23 @@ public class PlayerController : MonoBehaviour
         {
             Text ammoCt = GameObject.Find("Ammo Count").GetComponent<Text>();
             ammoCt.text = (int.Parse(ammoCt.text) - 1).ToString();
+            StartCoroutine(StartAudio(shootAudio));
+           
         }
         else if (selected == 5)
         {
             Text freezeCt = GameObject.Find("Freeze Gun Count").GetComponent<Text>();
             freezeCt.text = (int.Parse(freezeCt.text) - 1).ToString();
+            StartCoroutine(StartAudio(freezegunAudio));
         }
     }
+
+
+    IEnumerator StartAudio(AudioSource source)
+    {
+        source.Play();
+        yield return new WaitForSeconds(source.clip.length);
+
+    }
+
 }

@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
 
     public bool disableMinimap;
 
+    public AudioSource buttonAudio;
+
     public void SetDefaultSettings() {
         this.width = 155;
         widthSlider.value = 155;
@@ -102,8 +104,6 @@ public class GameManager : MonoBehaviour
     private GameObject LoadingMenu;
 
 
-
-
     private void Start()
     {
             this.MainMenu = GameObject.Find("MainMenu");
@@ -120,7 +120,13 @@ public class GameManager : MonoBehaviour
             randomFillSlider.onValueChanged.AddListener(delegate { SetRandomFillPercent((int)randomFillSlider.value); });
             forestDensitySlider.onValueChanged.AddListener(delegate { SetForestDensity((int)forestDensitySlider.value); });
 
-            randomSeedToggle.onValueChanged.AddListener(delegate { SetUseRandomSeed(randomSeedToggle.isOn); });
+            passageWidthSlider.onValueChanged.AddListener(delegate { SetPassageWidth((int)passageWidthSlider.value); });
+            wallThreshholdSlider.onValueChanged.AddListener(delegate { SetWallThreshholdSize((int)wallThreshholdSlider.value); });
+   
+            roomThreshholdSlider.onValueChanged.AddListener(delegate { SetRoomThresholdSize((int)roomThreshholdSlider.value); });
+
+
+        randomSeedToggle.onValueChanged.AddListener(delegate { SetUseRandomSeed(randomSeedToggle.isOn); });
             seedInput.onValueChanged.AddListener(delegate { SetSeed(seedInput.text); });
             //miniMapToggle.onValueChanged.AddListener(delegate { SetMapStatus(miniMapToggle.isOn); });
 
@@ -137,6 +143,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayButtonPressed()
     {
+        StartCoroutine(StartAudio(buttonAudio));
         MapGenerator.enemy_cap = this.enemy_cap;
         MapGenerator.num_marbles = this.num_marbles;
         MapGenerator.width = this.width;
@@ -165,19 +172,21 @@ public class GameManager : MonoBehaviour
         }
 
     }
-
-        public void ToSettings() {
+    public void ToSettings() {
+        StartCoroutine(StartAudio(buttonAudio));
         this.MainMenu.SetActive(false);
         this.SettingsMenu.SetActive(true);
     }
 
     public void BackButton()
     {
+        StartCoroutine(StartAudio(buttonAudio));
         this.MainMenu.SetActive(true);
         this.SettingsMenu.SetActive(false);
     }
 
     public void QuitButton() {
+        StartCoroutine(StartAudio(buttonAudio));
         #if UNITY_EDITOR
         // Application.Quit() does not work in the editor so
         // UnityEditor.EditorApplication.isPlaying need to be set to false to end the game
@@ -189,63 +198,83 @@ public class GameManager : MonoBehaviour
 
     public void SetWidth(int w)
     {
+        StartCoroutine(StartAudio(buttonAudio));
         width = w;
     }
 
     public void SetHeigth(int h)
     {
+        StartCoroutine(StartAudio(buttonAudio));
         height = h;
     }
 
     public void SetNumMarbles(int num)
     {
+        StartCoroutine(StartAudio(buttonAudio));
         num_marbles = num;
     }
 
     public void SetEnemyCap(int cap)
     {
+        StartCoroutine(StartAudio(buttonAudio));
         enemy_cap = cap;
     }
 
    
     public void SetPassageWidth(int pw)
     {
+        StartCoroutine(StartAudio(buttonAudio));
         passageWidth = pw;
     }
 
     public void SetSeed(String s)
     {
+        StartCoroutine(StartAudio(buttonAudio));
+        StartCoroutine(StartAudio(buttonAudio));
         seed = s;
     }
 
     public void SetUseRandomSeed(bool b)
     {
+        StartCoroutine(StartAudio(buttonAudio));
         useRandomSeed = b;
     }
 
     public void SetRandomFillPercent(int num)
     {
+        StartCoroutine(StartAudio(buttonAudio));
         randomFillPercent = num;
     }
 
     public void SetWallThreshholdSize(int num)
     {
+        StartCoroutine(StartAudio(buttonAudio));
         wallThresholdSize = num;
     }
 
     public void SetRoomThresholdSize(int num)
     {
+        StartCoroutine(StartAudio(buttonAudio));
         roomThresholdSize = num;
     }
 
     public void SetForestDensity(int num)
     {
+        StartCoroutine(StartAudio(buttonAudio));
         forest_density = num;
     }
 
     public void SetMapStatus(bool enabled)
     {
+        StartCoroutine(StartAudio(buttonAudio));
         disableMinimap = enabled;
+
+    }
+
+    IEnumerator StartAudio(AudioSource source)
+    {
+        source.Play();
+        yield return new WaitForSeconds(source.clip.length);
 
     }
 

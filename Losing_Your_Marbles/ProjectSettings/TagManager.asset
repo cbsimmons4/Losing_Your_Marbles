@@ -9,6 +9,8 @@ TagManager:
   - mystery box
   - item
   - enemy
+  - player
+  - marbletrigger
   layers:
   - Default
   - TransparentFX

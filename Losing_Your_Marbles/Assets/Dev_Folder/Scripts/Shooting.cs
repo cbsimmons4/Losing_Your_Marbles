@@ -27,17 +27,27 @@ public class Shooting : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if(Input.GetMouseButton(0) && timer >= fireRate && playerChoice.hasAmmo())
+
+        if (Input.GetMouseButton(0) && timer >= fireRate && playerChoice.hasAmmo())
         {
             shoot();
         }
-
+       
         if (timer >= fireRate * 0.2f)
         {
             // ... disable the effects.
             gunLine.enabled = false;
         }
     }
+
+    IEnumerator StartAudio(AudioSource source)
+    {
+
+        source.Play();
+        yield return new WaitForSeconds(source.clip.length);
+
+    }
+
 
     void shoot()
     {
