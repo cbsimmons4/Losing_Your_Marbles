@@ -30,7 +30,8 @@ public class Shooting : MonoBehaviour
 
         if (Input.GetMouseButton(0) && timer >= fireRate && playerChoice.hasAmmo())
         {
-            shoot();
+            if (Time.timeScale == 1) { shoot(); }
+
         }
        
         if (timer >= fireRate * 0.2f)

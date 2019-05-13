@@ -106,11 +106,14 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 1;
+
             this.MainMenu = GameObject.Find("MainMenu");
             this.SettingsMenu = GameObject.Find("SettingsMenu");
             this.LoadingMenu = GameObject.Find("Loading");
 
-        SetDefaultSettings();
+            SetDefaultSettings();
 
             widthSlider.onValueChanged.AddListener(delegate { SetWidth((int)widthSlider.value); });
             heightSlider.onValueChanged.AddListener(delegate { SetHeigth((int)heightSlider.value); });

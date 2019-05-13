@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class PlayerController : MonoBehaviour
     public AudioSource gatherAudio;
     public AudioSource pickupAudio;
     public Image damagePanel;
+    public GameObject pausemenu;
+    private bool paused;
 
     private bool isVisible;
 
@@ -40,6 +43,8 @@ public class PlayerController : MonoBehaviour
         selected = 1;
         GameObject.Find("Ammo Title").GetComponent<Text>().color = new Color(255, 215, 0);
         this.isVisible = true;
+        this.paused = false;
+        
     }
 
     // Start is called before the first frame update
@@ -59,6 +64,31 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (paused)
+        {
+            if(Input.GetKeyDown(KeyCode.P)){
+                Time.timeScale = 1;
+                this.paused = !paused;
+                this.pausemenu.SetActive(false);
+            }
+            else if (Input.GetKeyDown(KeyCode.Q))
+            {
+                Time.timeScale = 1;
+                SceneManager.LoadScene(0);
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                Time.timeScale = 0;
+                this.paused = !paused;
+                this.pausemenu.SetActive(true);
+            }
+
+        }
+
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             FreezeGun.transform.position = FreezeGun.transform.parent.position + (1.3f * FreezeGun.transform.parent.forward) + (-0.6f * FreezeGun.transform.parent.up);
