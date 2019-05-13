@@ -46,22 +46,31 @@ public class GameManager : MonoBehaviour
     public void SetDefaultSettings() {
         this.width = 155;
         widthSlider.value = 155;
+        widthText.text = 155.ToString();
         this.height = 155;
         heightSlider.value = 155;
+        heightText.text = 155.ToString();
         this.num_marbles = 15;
         marbleCountSlider.value = 15;
+        numMText.text = 15.ToString();
         this.enemy_cap = 125;
         enemyCapSlider.value = 125;
+        capText.text = 125.ToString();
         this.passageWidth = 6;
         passageWidthSlider.value = 6;
+        passagewidthText.text = 6.ToString();
         this.randomFillPercent = 48;
         randomFillSlider.value = 48;
+        fillText.text = 48.ToString();
         this.wallThresholdSize = 50;
         wallThreshholdSlider.value = 50;
+        wallTText.text = 50.ToString();
         this.roomThresholdSize = 50;
         roomThreshholdSlider.value = 50;
+        roomTText.text = 50.ToString();
         this.forest_density = 2;
         forestDensitySlider.value = 2;
+        FDText.text = 2.ToString();
         this.useRandomSeed = true;
         randomSeedToggle.isOn = true;
         this.seed = "Enter Seed...";
@@ -97,7 +106,17 @@ public class GameManager : MonoBehaviour
 
     public Button quitButton;
 
-   //public Slider LoadingSlider;
+    public Text widthText;
+    public Text heightText;
+    public Text numMText;
+    public Text capText;
+    public Text fillText;
+    public Text FDText;
+    public Text passagewidthText;
+    public Text wallTText;
+    public Text roomTText;
+
+    //public Slider LoadingSlider;
 
     private GameObject MainMenu;
     private GameObject SettingsMenu;
@@ -106,7 +125,18 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-            Cursor.lockState = CursorLockMode.None;
+
+            widthText = GameObject.Find("WidthNum").GetComponent<Text>();
+            heightText = GameObject.Find("HeightNum").GetComponent<Text>();
+            numMText = GameObject.Find("NumMarblesText").GetComponent<Text>();
+            capText = GameObject.Find("EnemyCap").GetComponent<Text>();
+            fillText = GameObject.Find("RFPTtext").GetComponent<Text>();
+            FDText = GameObject.Find("ForestDensityText").GetComponent<Text>();
+            passagewidthText = GameObject.Find("PassageWidthText").GetComponent<Text>();
+            wallTText = GameObject.Find("WallTText").GetComponent<Text>();
+            roomTText = GameObject.Find("RoomTText").GetComponent<Text>();
+
+        Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 1;
 
             this.MainMenu = GameObject.Find("MainMenu");
@@ -129,7 +159,7 @@ public class GameManager : MonoBehaviour
             roomThreshholdSlider.onValueChanged.AddListener(delegate { SetRoomThresholdSize((int)roomThreshholdSlider.value); });
 
 
-        randomSeedToggle.onValueChanged.AddListener(delegate { SetUseRandomSeed(randomSeedToggle.isOn); });
+            randomSeedToggle.onValueChanged.AddListener(delegate { SetUseRandomSeed(randomSeedToggle.isOn); });
             seedInput.onValueChanged.AddListener(delegate { SetSeed(seedInput.text); });
             //miniMapToggle.onValueChanged.AddListener(delegate { SetMapStatus(miniMapToggle.isOn); });
 
@@ -203,24 +233,28 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(StartAudio(buttonAudio));
         width = w;
+        widthText.text = w.ToString();
     }
 
     public void SetHeigth(int h)
     {
         StartCoroutine(StartAudio(buttonAudio));
         height = h;
+        heightText.text = h.ToString();
     }
 
     public void SetNumMarbles(int num)
     {
         StartCoroutine(StartAudio(buttonAudio));
         num_marbles = num;
+        numMText.text = num.ToString();
     }
 
     public void SetEnemyCap(int cap)
     {
         StartCoroutine(StartAudio(buttonAudio));
         enemy_cap = cap;
+        capText.text = cap.ToString();
     }
 
    
@@ -228,6 +262,7 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(StartAudio(buttonAudio));
         passageWidth = pw;
+        passagewidthText.text = pw.ToString();
     }
 
     public void SetSeed(String s)
@@ -241,30 +276,35 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(StartAudio(buttonAudio));
         useRandomSeed = b;
+
     }
 
     public void SetRandomFillPercent(int num)
     {
         StartCoroutine(StartAudio(buttonAudio));
         randomFillPercent = num;
+        fillText.text = num.ToString();
     }
 
     public void SetWallThreshholdSize(int num)
     {
         StartCoroutine(StartAudio(buttonAudio));
         wallThresholdSize = num;
+        wallTText.text = num.ToString();
     }
 
     public void SetRoomThresholdSize(int num)
     {
         StartCoroutine(StartAudio(buttonAudio));
         roomThresholdSize = num;
+        roomTText.text = num.ToString();
     }
 
     public void SetForestDensity(int num)
     {
         StartCoroutine(StartAudio(buttonAudio));
         forest_density = num;
+        FDText.text = num.ToString();
     }
 
     public void SetMapStatus(bool enabled)
