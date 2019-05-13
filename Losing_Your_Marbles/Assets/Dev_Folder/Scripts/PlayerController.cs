@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     private bool isVisible;
 
     int selected;
-   
+
     private void Awake()
     {
         damagePanel.enabled = false;
@@ -120,7 +120,9 @@ public class PlayerController : MonoBehaviour
                     StartCoroutine(StartAudio(gatherAudio));
                     if(int.Parse(marbleCount.text) == 0)
                     {
+                        Time.timeScale = 0;
                         winText.text = "You Win!";
+                        SceneManager.LoadScene(0);
                     }
                 }
                    
@@ -303,10 +305,13 @@ public class PlayerController : MonoBehaviour
         //check if health drops to 0 
         if(curr == 0)
         {
+            Time.timeScale = 0;
             winText.text = "You Lose!";
-            //add some operation, possible back to the main menu
+            SceneManager.LoadScene(0);
         }
     }
+
+   
 
     IEnumerator DamagePanelController()
     {
