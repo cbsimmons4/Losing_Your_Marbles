@@ -106,7 +106,7 @@ public class Enemy_script : MonoBehaviour
         dead = true;
         enemAnim.SetTrigger("Dead");
         nav.enabled = false;
-        Destroy(gameObject, 3);
+        Destroy(gameObject, 2);
        
     }
 

@@ -1250,7 +1250,7 @@ MonoBehaviour:
   followMinDist: 3
   followMaxDist: 100
   attackDist: 3
-  attackTime: 0.5
+  attackTime: 0.6
   freezeTime: 5
 --- !u!195 &5200313063028820631
 NavMeshAgent:

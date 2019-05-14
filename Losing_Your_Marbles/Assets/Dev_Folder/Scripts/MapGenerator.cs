@@ -100,7 +100,7 @@ public class MapGenerator : MonoBehaviour {
     private void add_decorations() {
         foreach (KeyValuePair<int, int> space in this.open_spaces)
         {
-            if (Random.Range(1, 50) < forest_density + 1)
+            if (Random.Range(1, 70) < forest_density + 1)
             {
                 Vector3 cur_pos = new Vector3((space.Key - this.center_x) * 2, 0, (space.Value - this.center_z) * 2);
                 GameObject obj = this.decorations[Random.Range(0, this.decorations.Count)];
@@ -118,7 +118,7 @@ public class MapGenerator : MonoBehaviour {
 
         foreach (KeyValuePair<int, int> space in  this.open_spaces)
         {
-            if (Random.Range(1,50) < forest_density)
+            if (Random.Range(1,70) < forest_density + 1)
             {
                 Vector3 cur_pos = new Vector3((space.Key - this.center_x) * 2, 0, (space.Value - this.center_z) * 2) ;
                 GameObject obj = this.obsticles[Random.Range(0, this.obsticles.Count)];

@@ -137,6 +137,7 @@ public class GameManager : MonoBehaviour
             roomTText = GameObject.Find("RoomTText").GetComponent<Text>();
 
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
             Time.timeScale = 1;
 
             this.MainMenu = GameObject.Find("MainMenu");
@@ -171,6 +172,15 @@ public class GameManager : MonoBehaviour
 
             this.SettingsMenu.SetActive(false);
             this.LoadingMenu.SetActive(false);
+
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)){
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
 
     }
 

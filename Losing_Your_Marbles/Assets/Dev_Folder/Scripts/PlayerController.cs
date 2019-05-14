@@ -122,7 +122,7 @@ public class PlayerController : MonoBehaviour
                     {
                         Time.timeScale = 0;
                         winText.text = "You Win!";
-                        SceneManager.LoadScene(0);
+                        //SceneManager.LoadScene(0);
                     }
                 }
                    
@@ -250,7 +250,7 @@ public class PlayerController : MonoBehaviour
 
             int rand = Random.Range(0, 6);
             incrementItemCount(rand);
-            StopCoroutine(StartAudio(pickupAudio));
+            StartCoroutine(StartAudio(pickupAudio));
             Destroy(other.gameObject); 
         }  
     }
@@ -307,7 +307,8 @@ public class PlayerController : MonoBehaviour
         {
             Time.timeScale = 0;
             winText.text = "You Lose!";
-            SceneManager.LoadScene(0);
+           
+            //SceneManager.LoadScene(0);
         }
     }
 
