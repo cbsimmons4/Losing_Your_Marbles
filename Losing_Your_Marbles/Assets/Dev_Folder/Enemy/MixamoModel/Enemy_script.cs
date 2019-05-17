@@ -22,10 +22,12 @@ public class Enemy_script : MonoBehaviour
     private float nextUpdate;
     private float updateRate;
     private Vector3 lastPostion;
+    EnemySpawnController sp;
   
     // Start is called before the first frame update
     void Start()
     {
+        sp = GameObject.Find("EnemyOperator").GetComponent<EnemySpawnController>();
         updateRate = 1;
         nextUpdate = Time.time;
         lastPostion = transform.position;
@@ -103,11 +105,11 @@ public class Enemy_script : MonoBehaviour
 
     public void death()
     {
+        //sp.cur_spawned--;
         dead = true;
         enemAnim.SetTrigger("Dead");
         nav.enabled = false;
         Destroy(gameObject, 2);
-       
     }
 
     public void freeze()

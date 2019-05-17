@@ -10,7 +10,7 @@ public class EnemySpawnController : MonoBehaviour
     private GameObject player;
     public GameObject MysteryBox;
     private int cap;
-    private int cur_spawned;
+    public int cur_spawned;
 
     private float spawnrate;
 
@@ -27,6 +27,8 @@ public class EnemySpawnController : MonoBehaviour
         cap = MapGenerator.enemy_cap;
         this.cur_spawned = 0;
     }
+
+
 
     // Update is called once per frame
     void Update()
