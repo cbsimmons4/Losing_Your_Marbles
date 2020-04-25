@@ -1,7 +1,7 @@
 # Losing_Your_Marbles
-CMSC425 Final Project
+Game Programming Final Project
 
-CMSC425 Final Project Report
+Final Project Report
 Game Title: Losing Your Marbles
 
 Team Members: Collin Graves, Sahana Rao, and Cameron Simmons
