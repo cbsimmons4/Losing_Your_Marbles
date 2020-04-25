@@ -5,43 +5,44 @@ CMSC425 Final Project Report
 Game Title: Losing Your Marbles
 
 Team Members: Collin Graves, Sahana Rao, and Cameron Simmons
-YouTube Link:  https://youtu.be/70SjKs1e6XY
+Demo Video YouTube Link: https://youtu.be/70SjKs1e6XY
+Final Report: https://docs.google.com/document/d/18WclnYj3ohKbKbP0Zq7i-l76rDNQov7lM4pHMFjb-Gg/edit?usp=sharing
 Short Description:
 You have lost your marbles in the forest! Now you have to get them back! But watch out, there are monsters that roam the forest!
 This is a first person shooter game in a procedurally generated forest-maze environment. The goal of the game is to explore the forest and collect the marbles roaming around the forest. The number of marbles can be set by the player. In addition, there are monsters roaming around the forest that will attack the player. Each hit from a monster causes the player to lose 1 of their 5 health points. The player can also shoot at the monsters if they have ammo for their gun. Scattered around the forest are item boxes that give the player items such as speed boost, invisibility, marble traps, marble/monster freeze, and health potions. These can be stored and used at any time during the game. Once all of the marbles are collected, the player wins, but if the player’s health reaches 0 before then, they lose. 
 
 Credits:
 
-Cameron Simmons:
-  Procedural Map Generation
-  Connected maze generation
-  Spawn of marbles, enemies, and forest (trees and bushes)
-  Runtime NavMesh bake
-  Grassy Terrain
-  Main Menu (Except instructions UI)
-  Audio (Music and sound effects)
-  MiniMap UI
-  Loading Scene Management
-  Player movement and gun aim
-  Invisibility and speed boost power u
+Cameron Simmons - 
+  Procedural Map Generation,
+  Connected maze generation,
+  Spawn of marbles enemies and forest (trees and bushes),
+  Runtime NavMesh bake,
+  Grassy Terrain,
+  Main Menu (Except instructions UI),
+  Audio (Music and sound effects),
+  MiniMap UI,
+  Loading Scene Management,
+  Player movement and gun aim,
+  Invisibility and speed boost power u,
 
-Collin Graves
-  Enemy AI
-  Enemy animations
-  Idle, walking, attack, death
-  Gun scripts
-  Enemy death
-  Enemy freeze
-  Health UI
+Collin Graves:
+  Enemy AI,
+  Enemy animations,
+  Idle, walking, attack, death,
+  Gun scripts,
+  Enemy death,
+  Enemy freeze,
+  Health UI,
 
-Sahana Rao
-  Marble AI/rolling
-  Marble traps
-  Freezing marbles
-  Inventory UI
-  Inventory scripts
-  Health potion
-  Instructions UI 
+Sahana Rao:
+  Marble AI/rolling,
+  Marble traps,
+  Freezing marbles,
+  Inventory UI,
+  Inventory scripts,
+  Health potion,
+  Instructions UI
 
 Full Game-Play:
 This is a first person shooter game where the object of the game is for the player to collect all the marbles that are roaming the forest before being overwhelmed by the monsters. 
