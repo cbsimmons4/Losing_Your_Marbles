@@ -24,7 +24,7 @@ Cameron Simmons -
   MiniMap UI,
   Loading Scene Management,
   Player movement and gun aim,
-  Invisibility and speed boost power u,
+  Invisibility and speed boost power up
 
 Collin Graves:
   Enemy AI,
@@ -33,7 +33,7 @@ Collin Graves:
   Gun scripts,
   Enemy death,
   Enemy freeze,
-  Health UI,
+  Health UI
 
 Sahana Rao:
   Marble AI/rolling,
