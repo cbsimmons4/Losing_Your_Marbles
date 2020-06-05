@@ -1,8 +1,4 @@
 # Losing_Your_Marbles
-Game Programming Final Project
-
-Final Project Report
-Game Title: Losing Your Marbles
 
 Team Members: Collin Graves, Sahana Rao, and Cameron Simmons
 Demo Video YouTube Link: https://youtu.be/70SjKs1e6XY
